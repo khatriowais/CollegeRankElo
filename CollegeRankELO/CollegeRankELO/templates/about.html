@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% set active = 'about' %}
+{% block title %}About · CollegeRankELO{% endblock %}
+{% block body %}
+<h1>About the Project</h1>
+<div class="card">
+  <h2>Why Elo?</h2>
+  <p>Traditional rankings are static — a college can sit at #12 for years even as its placements collapse. Elo is dynamic: every pairwise comparison updates ratings in real time.</p>
+  <h3>Formulas</h3>
+  <pre><code>Expected(A) = 1 / (1 + 10^((R_B - R_A) / 400))
+R_A_new    = R_A + K * (S_A - Expected(A))
+K = {{ k }},  Starting rating = {{ start }},  Draw threshold = {{ draw_threshold }}</code></pre>
+
+  <h3>Winner is decided by a weighted score, not Elo</h3>
+  <ul>
+    <li>ROI — {{ (weights.roi*100)|int }}%</li>
+    <li>Placement % — {{ (weights.placement*100)|int }}%</li>
+    <li>Avg Package — {{ (weights.package*100)|int }}%</li>
+    <li>Fees (inverted) — {{ (weights.fees*100)|int }}%</li>
+    <li>NAAC — {{ (weights.naac*100)|int }}%</li>
+  </ul>
+  <h3>NAAC mapping</h3>
+  <p>{% for g, v in naac.items() %}<span class="badge">{{ g }} = {{ v }}</span> {% endfor %}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "_base.html" %}
+{% set active = 'compare' %}
+{% block title %}Compare · CollegeRankELO{% endblock %}
+{% block body %}
+<div class="page-head">
+  <div>
+    <span class="badge">⚔️ Head-to-head</span>
+    <h1>Compare two colleges</h1>
+    <p>Pick any pair. We score them on ROI, placements, package, fees and NAAC — the winner takes Elo points from the loser.</p>
+  </div>
+  <button id="printBtn" class="btn btn-ghost" onclick="window.print()" type="button">🖨 Print / PDF</button>
+</div>
+
+<div class="card compare-picker">
+  <select id="pickA" aria-label="Select College A"><option value="">Select College A…</option>
+    {% for c in colleges %}<option value="{{ c.id }}">{{ c.college_name }} (Elo {{ c.elo_rating }})</option>{% endfor %}
+  </select>
+  <span class="vs">VS</span>
+  <select id="pickB" aria-label="Select College B"><option value="">Select College B…</option>
+    {% for c in colleges %}<option value="{{ c.id }}">{{ c.college_name }} (Elo {{ c.elo_rating }})</option>{% endfor %}
+  </select>
+  <button id="compareBtn" class="btn btn-primary" type="button">Compare →</button>
+</div>
+
+<div id="compareResult" class="hidden" aria-live="polite"></div>
+
+<div class="card" style="margin-top:14px">
+  <h3 style="margin-top:0">How the winner is decided</h3>
+  <div class="two-col" style="gap:22px">
+    <div>
+      <div class="weight-row"><span>💰 ROI</span><div class="meter"><i style="width:{{ (weights.roi*100)|int }}%"></i></div><strong>{{ (weights.roi*100)|int }}%</strong></div>
+      <div class="weight-row"><span>🎯 Placement %</span><div class="meter"><i style="width:{{ (weights.placement*100)|int }}%"></i></div><strong>{{ (weights.placement*100)|int }}%</strong></div>
+      <div class="weight-row"><span>📦 Avg package</span><div class="meter"><i style="width:{{ (weights.package*100)|int }}%"></i></div><strong>{{ (weights.package*100)|int }}%</strong></div>
+      <div class="weight-row"><span>🧾 Fees (lower wins)</span><div class="meter"><i style="width:{{ (weights.fees*100)|int }}%"></i></div><strong>{{ (weights.fees*100)|int }}%</strong></div>
+      <div class="weight-row"><span>🎓 NAAC grade</span><div class="meter"><i style="width:{{ (weights.naac*100)|int }}%"></i></div><strong>{{ (weights.naac*100)|int }}%</strong></div>
+    </div>
+    <p class="muted small" style="margin:0">Scores are normalised against the best of the two colleges, so the comparison is always fair. If the gap is under <strong>{{ draw_threshold }} points</strong> it is a draw and both keep most of their Elo. Elo itself never decides the winner — that would be circular. <a href="{{ url_for('about') }}">Full methodology →</a></p>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/compare.js') }}"></script>
+{% endblock %}

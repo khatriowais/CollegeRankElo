@@ -1,0 +1,114 @@
+{% extends "_base.html" %}
+{% block title %}{{ college.college_name }} · CollegeRankELO{% endblock %}
+{% block body %}
+{% if college.is_ranked %}
+<a href="{{ url_for('leaderboard') }}" class="back-link">← Back to leaderboard</a>
+<header class="college-header card">
+  <span class="badge">🎓 {{ college.type }} · {{ college.city }}</span>
+  <h1 style="margin-bottom:2px">{{ college.college_name }}</h1>
+  <p class="meta-line">{{ college.university }}{% if college.website %} · <a href="{{ college.website }}" target="_blank" rel="noopener">Official website ↗</a>{% endif %}</p>
+  <div class="badges">
+    <span class="badge">⚡ Elo {{ college.elo_rating }}</span>
+    <span class="badge">🎓 NAAC {{ college.naac_grade }}</span>
+    <span class="badge">{% if college.nirf_rank %}NIRF #{{ college.nirf_rank }}{% else %}NIRF — unranked{% endif %}</span>
+    <span class="badge">💰 ROI {% if college.roi is not none %}{{ college.roi }}×{% else %}—{% endif %}</span>
+    <span class="badge">⭐ {% if college.student_rating is not none %}{{ college.student_rating }}/5 students{% else %}Not yet rated{% endif %}</span>
+  </div>
+</header>
+
+<section class="cards stat-cards">
+  <div class="card stat-tile"><div class="stat-label">Annual fee</div><div class="stat-value">{% if college.annual_fee is not none %}₹{{ '{:,}'.format(college.annual_fee) }}{% else %}—{% endif %}</div><div class="stat-sub">Tuition per year</div></div>
+  <div class="card stat-tile"><div class="stat-label">Avg package</div><div class="stat-value">{% if college.average_package is not none %}₹{{ '{:,}'.format(college.average_package) }}{% else %}—{% endif %}</div><div class="stat-sub">Mean placement offer</div></div>
+  <div class="card stat-tile"><div class="stat-label">Highest package</div><div class="stat-value">{% if college.highest_package is not none %}₹{{ '{:,}'.format(college.highest_package) }}{% else %}—{% endif %}</div><div class="stat-sub">Best offer on record</div></div>
+  <div class="card stat-tile"><div class="stat-label">Placement rate</div><div class="stat-value">{% if college.placement_percentage is not none %}{{ college.placement_percentage }}%{% else %}—{% endif %}</div><div class="stat-sub">Students placed</div></div>
+</section>
+
+{% if college.annual_fee is none and college.average_package is none and college.placement_percentage is none %}
+<div class="card" style="margin-top:14px;border-left:4px solid var(--accent, #4338ca)">
+  <p class="muted small" style="margin:0">Economic metrics for this college aren’t published in a citable form yet, so they’re shown as “—” rather than invented. Ranking currently reflects the verified <strong>NAAC {{ college.naac_grade }}</strong> signal. Real figures can be loaded via the admin panel / CSV import.</p>
+</div>
+{% endif %}
+
+<section class="grid-2">
+  <div class="card chart-card"><div class="section-title"><h2>Elo history</h2></div><canvas id="eloHistoryChart" height="180"></canvas></div>
+  <div class="card chart-card"><div class="section-title"><h2>Profile radar</h2></div><canvas id="radarChart" height="180"></canvas></div>
+</section>
+
+<section class="card">
+  <div class="section-title"><h2>Recent matches ({{ comparisons|length }})</h2></div>
+  {% if comparisons %}
+    <div class="table-wrap">
+    <table class="leaderboard">
+      <thead><tr><th>Date</th><th>Opponent</th><th>Result</th><th>Elo movement</th></tr></thead>
+      <tbody>
+      {% for c in comparisons %}
+        {% set is_a = (c.a == college.college_name) %}
+        {% set old = c.old_elo_a if is_a else c.old_elo_b %}
+        {% set new = c.new_elo_a if is_a else c.new_elo_b %}
+        {% set delta = (new - old)|round(2) %}
+        <tr>
+          <td class="muted">{{ c.created_at[:10] if c.created_at else '—' }}</td>
+          <td class="college-cell"><strong>{% if is_a %}{{ c.b }}{% else %}{{ c.a }}{% endif %}</strong></td>
+          <td>
+            {% if c.winner == 'DRAW' %}<span class="pill pill-draw">Draw</span>
+            {% elif (c.winner == 'A' and is_a) or (c.winner == 'B' and not is_a) %}<span class="pill pill-win">Win</span>
+            {% else %}<span class="pill pill-loss">Loss</span>{% endif %}
+          </td>
+          <td><strong>{{ old }} → {{ new }}</strong> <span class="muted">({{ '+' if delta >= 0 }}{{ delta }})</span></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  {% else %}<div class="empty">No matches yet — this college gains Elo as soon as it is compared. <a href="{{ url_for('compare_page') }}">Compare it now →</a></div>{% endif %}
+</section>
+
+<script id="historyData" type="application/json">{{ history|tojson }}</script>
+<script id="collegeData" type="application/json">{{ college|tojson }}</script>
+
+{% else %}
+{# ---- Directory listing (not Elo-ranked) ---- #}
+<a href="{{ url_for('directory') }}" class="back-link">← Back to directory</a>
+<header class="college-header card">
+  <span class="badge">📖 Directory listing · {{ college.country }}</span>
+  <h1 style="margin-bottom:2px">{{ college.college_name }}</h1>
+  <p class="meta-line">
+    {% if college.region %}{{ college.region }}, {% endif %}{{ college.country }}
+    {% if college.website %} · <a href="{{ college.website }}" target="_blank" rel="noopener">Official website ↗</a>{% endif %}
+  </p>
+</header>
+
+<section class="card">
+  <h2 style="margin-top:0">Not Elo-ranked</h2>
+  <p class="muted">This institution is part of the open <strong>India directory</strong>, sourced from the
+    <a href="{{ college.source_url or 'https://github.com/Hipo/university-domains-list' }}" target="_blank" rel="noopener">Hipolabs dataset</a>.
+    CollegeRankELO only runs head-to-head Elo where <em>verified metrics</em> exist — currently the curated
+    Mumbai University cohort. This listing has no published fees / placement / package data, so it is shown for
+    discovery only and does not receive an Elo rating.</p>
+  <div class="hero-actions" style="margin-top:12px">
+    <a class="btn btn-primary" href="{{ url_for('leaderboard') }}">See the ranked leaderboard →</a>
+    <a class="btn btn-ghost" href="{{ url_for('directory') }}">Back to directory</a>
+  </div>
+</section>
+
+<section class="cards stat-cards">
+  <div class="card stat-tile"><div class="stat-label">Country</div><div class="stat-value" style="font-size:1.2rem">{{ college.country or '—' }}</div><div class="stat-sub">Directory cohort</div></div>
+  <div class="card stat-tile"><div class="stat-label">State / region</div><div class="stat-value" style="font-size:1.2rem">{{ college.region or '—' }}</div><div class="stat-sub">Where available</div></div>
+  <div class="card stat-tile"><div class="stat-label">Source</div><div class="stat-value" style="font-size:1.2rem">Hipolabs</div><div class="stat-sub">Open dataset</div></div>
+  <div class="card stat-tile"><div class="stat-label">Elo</div><div class="stat-value">—</div><div class="stat-sub">Not ranked</div></div>
+</section>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+{% if college.is_ranked %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const history = JSON.parse(document.getElementById('historyData').textContent);
+    const col = JSON.parse(document.getElementById('collegeData').textContent);
+    drawEloHistoryChart('eloHistoryChart', history, col.college_name);
+    drawCollegeRadar('radarChart', col);
+  });
+</script>
+{% endif %}
+{% endblock %}

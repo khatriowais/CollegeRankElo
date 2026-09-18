@@ -1,0 +1,22 @@
+{% macro navbar(active='') -%}
+<nav class="navbar" aria-label="Primary">
+  <div class="nav-inner">
+    <div class="brand">
+      <a href="{{ url_for('index') }}" aria-label="CollegeRankELO home">
+        <span class="brand-mark">E</span>
+        <span>CollegeRankELO<br /><small>Elo Rankings · Mumbai</small></span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a class="{{ 'active' if active=='home' }}" href="{{ url_for('index') }}">Home</a></li>
+      <li><a class="{{ 'active' if active=='leaderboard' }}" href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
+      <li><a class="{{ 'active' if active=='directory' }}" href="{{ url_for('directory') }}">Directory</a></li>
+      <li><a class="{{ 'active' if active=='compare' }}" href="{{ url_for('compare_page') }}">Compare</a></li>
+      <li><a class="{{ 'active' if active=='about' }}" href="{{ url_for('about') }}">Methodology</a></li>
+      <li><a class="{{ 'active' if active=='admin' }}" href="{{ url_for('admin_panel') }}">Admin</a></li>
+      <li><button id="themeToggle" class="theme-btn" title="Toggle light / dark theme" aria-label="Toggle theme">🌙</button></li>
+    </ul>
+  </div>
+</nav>
+{%- endmacro %}

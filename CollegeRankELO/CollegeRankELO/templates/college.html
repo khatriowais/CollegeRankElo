@@ -1,0 +1,58 @@
+{% extends "_base.html" %}
+{% block title %}{{ college.college_name }} · CollegeRankELO{% endblock %}
+{% block body %}
+<a href="{{ url_for('leaderboard') }}" class="back-link">← Back to leaderboard</a>
+<header class="college-header card">
+  <h1>{{ college.college_name }}</h1>
+  <p class="muted">{{ college.city }} · {{ college.type }} · {{ college.university }}</p>
+  <div class="badges">
+    <span class="badge">Elo {{ college.elo_rating }}</span>
+    <span class="badge">NAAC {{ college.naac_grade }}</span>
+    <span class="badge">NIRF #{{ college.nirf_rank }}</span>
+    <span class="badge">ROI {{ college.roi }}</span>
+  </div>
+</header>
+
+<section class="cards stat-cards">
+  <div class="card"><div class="stat-label">Annual Fee</div><div class="stat-value">₹{{ '{:,}'.format(college.annual_fee) }}</div></div>
+  <div class="card"><div class="stat-label">Avg Package</div><div class="stat-value">₹{{ '{:,}'.format(college.average_package) }}</div></div>
+  <div class="card"><div class="stat-label">Highest Package</div><div class="stat-value">₹{{ '{:,}'.format(college.highest_package) }}</div></div>
+  <div class="card"><div class="stat-label">Placement %</div><div class="stat-value">{{ college.placement_percentage }}%</div></div>
+</section>
+
+<section class="grid-2">
+  <div class="card"><h3>Elo History</h3><canvas id="eloHistoryChart" height="180"></canvas></div>
+  <div class="card"><h3>Profile Radar</h3><canvas id="radarChart" height="180"></canvas></div>
+</section>
+
+<section class="card">
+  <h3>Recent Comparison History</h3>
+  {% if comparisons %}
+    <table class="leaderboard">
+      <thead><tr><th>Date</th><th>Opponent</th><th>Result</th><th>Old→New Elo</th></tr></thead>
+      <tbody>
+      {% for c in comparisons %}
+        <tr>
+          <td>{{ c.created_at[:10] }}</td>
+          <td>{% if c.a == college.college_name %}{{ c.b }}{% else %}{{ c.a }}{% endif %}</td>
+          <td>{{ c.winner }}</td>
+          <td>{{ c.old_elo_a if c.a==college.college_name else c.old_elo_b }} → {{ c.new_elo_a if c.a==college.college_name else c.new_elo_b }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}<p class="muted">No comparisons yet.</p>{% endif %}
+</section>
+
+<script id="historyData" type="application/json">{{ history|tojson }}</script>
+<script id="collegeData" type="application/json">{{ college|tojson }}</script>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script>
+  const history = JSON.parse(document.getElementById('historyData').textContent);
+  const col = JSON.parse(document.getElementById('collegeData').textContent);
+  drawEloHistoryChart('eloHistoryChart', history, col.college_name);
+  drawCollegeRadar('radarChart', col);
+</script>
+{% endblock %}

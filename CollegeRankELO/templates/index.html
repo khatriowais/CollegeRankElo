@@ -1,0 +1,83 @@
+{% extends "_base.html" %}
+{% set active = 'home' %}
+{% block title %}CollegeRankELO — Dynamic Elo Ranking of Mumbai Colleges{% endblock %}
+{% block body %}
+<section class="hero">
+  <div>
+    <span class="eyebrow"><i></i> Final-year project · Live Elo rankings</span>
+    <h1>Which Mumbai college <span>really ranks higher?</span></h1>
+    <p class="lead">CollegeRankELO replaces static yearly tables with a living rating — every head-to-head comparison on placements, ROI, fees and accreditation moves Elo points, just like chess.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ url_for('leaderboard') }}">View Leaderboard →</a>
+      <a class="btn btn-ghost" href="{{ url_for('directory') }}">Browse India directory</a>
+      <a class="btn btn-ghost" href="{{ url_for('compare_page') }}">Compare two colleges</a>
+      <a class="btn btn-ghost" href="{{ url_for('about') }}">How it works</a>
+    </div>
+    <div class="search-wrap">
+      <input id="globalSearch" type="search" placeholder="Search colleges across India — try “Xavier”, “Ruia”, “IIT”, “Delhi”…" autocomplete="off" aria-label="Search colleges" />
+      <ul id="globalSearchResults" class="autocomplete" role="listbox"></ul>
+    </div>
+  </div>
+</section>
+
+<section class="cards stat-cards" aria-label="Overview statistics">
+  <div class="card stat-tile"><div class="stat-label">Elo-ranked colleges</div><div class="stat-value">{{ stats.ranked }}</div><div class="stat-sub">Mumbai University · head-to-head</div></div>
+  <div class="card stat-tile"><div class="stat-label">Directory listings</div><div class="stat-value">{{ stats.directory }}</div><div class="stat-sub">Indian institutions · open data</div></div>
+  <div class="card stat-tile"><div class="stat-label">Highest Elo</div><div class="stat-value">{{ stats.top_elo }}</div><div class="stat-sub">Current leader rating</div></div>
+  <div class="card stat-tile"><div class="stat-label">States covered</div><div class="stat-value">{{ stats.states }}</div><div class="stat-sub">Directory reach across India</div></div>
+</section>
+
+<section class="grid-2">
+  <div class="card">
+    <div class="section-title"><h2>🏆 Top 10 by Elo</h2><a href="{{ url_for('leaderboard') }}">Full table →</a></div>
+    {% if top10 %}
+    <ol class="top-list">
+      {% set max_elo = top10[0].elo_rating if top10 else 1 %}
+      {% for c in top10 %}
+        <li>
+          <span class="rank" aria-hidden="true"></span>
+          <div class="top-main">
+            <a href="{{ url_for('college_detail', cid=c.id) }}">{{ c.college_name }}</a>
+            <div class="elo-bar" aria-hidden="true"><i style="width:{{ (c.elo_rating / max_elo * 100)|round(1) }}%"></i></div>
+          </div>
+          <span class="elo-val">{{ c.elo_rating }}</span>
+        </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+      <div class="empty">No colleges yet. Seed the database to get started.</div>
+    {% endif %}
+  </div>
+  <div class="card">
+    <div class="section-title"><h2>⚡ Recent comparisons</h2><a href="{{ url_for('compare_page') }}">New comparison →</a></div>
+    {% if recent %}
+    <ul class="recent-list">
+      {% for r in recent %}
+        <li>
+          <strong>{{ r.a }}</strong> <span class="muted">vs</span> <strong>{{ r.b }}</strong><br />
+          {% if r.winner == 'DRAW' %}<span class="pill pill-draw">Draw</span>
+          {% elif r.winner == 'A' %}<span class="pill pill-win">{{ r.a }} won</span>
+          {% else %}<span class="pill pill-win">{{ r.b }} won</span>{% endif %}
+          <span class="muted small"> · Elo {{ r.old_elo_a }}→{{ r.new_elo_a }} vs {{ r.old_elo_b }}→{{ r.new_elo_b }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <div class="empty">No comparisons yet.<br /><a href="{{ url_for('compare_page') }}">Run your first head-to-head →</a></div>
+    {% endif %}
+    <div class="card" style="margin-top:14px;background:var(--bg)">
+      <h3 style="margin-top:0">Why Elo?</h3>
+      <p class="muted small" style="margin:0">Static lists freeze a college at one rank for a year. Elo moves after <em>every</em> comparison — beat a stronger peer and you gain more points. <a href="{{ url_for('about') }}">Read the methodology →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="card chart-card">
+  <div class="section-title"><h2>📊 Top 20 Elo ratings</h2><span class="muted small">Updates live after each comparison</span></div>
+  <canvas id="topEloChart" height="120" aria-label="Bar chart of top 20 Elo ratings"></canvas>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script>document.addEventListener('DOMContentLoaded', () => drawTopEloChart('topEloChart'));</script>
+{% endblock %}

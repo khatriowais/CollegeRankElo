@@ -1,0 +1,60 @@
+{% extends "_base.html" %}
+{% set active = 'admin' %}
+{% block title %}Admin · CollegeRankELO{% endblock %}
+{% block body %}
+{% if not logged_in %}
+  <div class="card auth-card">
+    <h1>Admin Login</h1>
+    <form method="post" action="{{ url_for('admin_login') }}">
+      <label>Username<input name="username" required></label>
+      <label>Password<input type="password" name="password" required></label>
+      <button class="btn btn-primary" type="submit">Log in</button>
+    </form>
+    <p class="muted">Default: <code>admin</code> / <code>admin123</code></p>
+  </div>
+{% else %}
+  <div class="admin-actions card">
+    <h1>Admin Panel</h1>
+    <div class="row">
+      <form method="post" action="{{ url_for('admin_reset_elo') }}"><button class="btn">Reset all Elo</button></form>
+      <form method="post" action="{{ url_for('admin_recalculate') }}"><button class="btn">Recalculate from history</button></form>
+      <a class="btn" href="{{ url_for('admin_export', fmt='csv') }}">Export CSV</a>
+      <a class="btn" href="{{ url_for('admin_export', fmt='json') }}">Export JSON</a>
+      <a class="btn" href="{{ url_for('admin_logout') }}">Logout</a>
+    </div>
+    <form method="post" action="{{ url_for('admin_import_csv') }}" enctype="multipart/form-data" class="row">
+      <input type="file" name="file" accept=".csv" required>
+      <button class="btn btn-primary">Import CSV</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Colleges ({{ colleges|length }})</h2>
+    <table class="leaderboard">
+      <thead><tr><th>#</th><th>Name</th><th>City</th><th>Type</th><th>Fee</th><th>Elo</th><th></th></tr></thead>
+      <tbody>
+      {% for c in colleges %}
+        <tr>
+          <td>{{ c.id }}</td>
+          <td><a href="{{ url_for('college_detail', cid=c.id) }}">{{ c.college_name }}</a></td>
+          <td>{{ c.city }}</td><td>{{ c.type }}</td>
+          <td>₹{{ '{:,}'.format(c.annual_fee) }}</td>
+          <td>{{ c.elo_rating }}</td>
+          <td><button class="btn btn-sm delete-btn" data-id="{{ c.id }}">Delete</button></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.querySelectorAll('.delete-btn').forEach(b => {
+      b.addEventListener('click', async () => {
+        if (!confirm('Delete this college?')) return;
+        const r = await fetch('/api/deleteCollege/' + b.dataset.id, {method:'DELETE'});
+        if (r.ok) location.reload();
+      });
+    });
+  </script>
+{% endif %}
+{% endblock %}

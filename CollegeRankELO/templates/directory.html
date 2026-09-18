@@ -1,0 +1,60 @@
+{% extends "_base.html" %}
+{% set active = 'directory' %}
+{% block title %}Directory · CollegeRankELO{% endblock %}
+{% block body %}
+<div class="page-head">
+  <div>
+    <span class="badge">📖 Open directory</span>
+    <h1>Indian colleges &amp; universities</h1>
+    <p>A searchable directory of Indian institutions from the open
+      <a href="https://github.com/Hipo/university-domains-list" target="_blank" rel="noopener">Hipolabs dataset</a>.
+      These are listed for discovery — they are <strong>not Elo-ranked</strong>, because no verified metrics
+      (fees, placements, packages) are published for them. The
+      <a href="{{ url_for('leaderboard') }}">leaderboard</a> ranks the curated Mumbai cohort.</p>
+  </div>
+</div>
+
+<form class="card filters" method="get" role="search" action="{{ url_for('directory') }}">
+  <input name="q" type="search" value="{{ q }}" placeholder="🔍 Search institution name…" aria-label="Search directory" />
+  <select name="region" aria-label="Filter by state">
+    <option value="">All states</option>
+    {% for r in regions %}<option value="{{ r }}" {{ 'selected' if r == region }}>{{ r }}</option>{% endfor %}
+  </select>
+  <button class="btn btn-primary" type="submit">Search</button>
+  {% if q or region %}<a class="btn btn-ghost" href="{{ url_for('directory') }}">Clear</a>{% endif %}
+</form>
+
+<div class="card">
+  <div class="section-title">
+    <h2>{{ total }} result{{ '' if total == 1 else 's' }}</h2>
+    <span class="muted small">Directory · not Elo-ranked</span>
+  </div>
+  {% if rows %}
+  <div class="table-wrap">
+    <table class="leaderboard">
+      <thead><tr><th>#</th><th>Institution</th><th>State</th><th>Website</th></tr></thead>
+      <tbody>
+      {% for c in rows %}
+        <tr>
+          <td class="muted">{{ (page - 1) * per_page + loop.index }}</td>
+          <td class="college-cell"><a href="{{ url_for('college_detail', cid=c.id) }}">{{ c.college_name }}</a><small>{{ c.country }}</small></td>
+          <td>{{ c.region or '—' }}</td>
+          <td>{% if c.website %}<a href="{{ c.website }}" target="_blank" rel="noopener">Visit ↗</a>{% else %}—{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="empty">No institutions match your search. <a href="{{ url_for('directory') }}">Clear filters</a></div>
+  {% endif %}
+
+  {% if pages > 1 %}
+  <div class="pagination">
+    {% if page > 1 %}<a class="btn btn-sm" href="{{ url_for('directory', q=q, region=region, page=page-1) }}">← Prev</a>{% else %}<button type="button" disabled>← Prev</button>{% endif %}
+    <span id="pageInfo">Page {{ page }} / {{ pages }}</span>
+    {% if page < pages %}<a class="btn btn-sm" href="{{ url_for('directory', q=q, region=region, page=page+1) }}">Next →</a>{% else %}<button type="button" disabled>Next →</button>{% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
