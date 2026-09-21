@@ -2,44 +2,35 @@
 {% set active = 'leaderboard' %}
 {% block title %}Leaderboard · CollegeRankELO{% endblock %}
 {% block body %}
-<div class="page-head">
-  <div>
-    <span class="badge">🏆 Live ranking</span>
-    <h1>Leaderboard</h1>
-    <p>Every comparison moves Elo points. Search, filter and sort to find the right college — click any row for full analytics.</p>
-  </div>
-</div>
-
-<div class="card filters" role="search">
-  <input id="lbSearch" type="search" placeholder="🔍 Search college or city…" aria-label="Search leaderboard" />
-  <select id="lbType" aria-label="Filter by type">
-    <option value="">All types</option><option>Aided</option><option>Unaided</option><option>Government</option>
+<h1>Leaderboard</h1>
+<div class="filters card">
+  <input id="lbSearch" type="search" placeholder="Search…" />
+  <select id="lbType">
+    <option value="">All types</option><option>Government</option><option>Private</option>
   </select>
-  <select id="lbCity" aria-label="Filter by city"><option value="">All cities</option></select>
-  <select id="lbSort" aria-label="Sort leaderboard">
-    <option value="elo_rating">Sort: Elo ↓</option>
-    <option value="roi">Sort: ROI ↓</option>
-    <option value="average_package">Sort: Package ↓</option>
-    <option value="placement_percentage">Sort: Placement % ↓</option>
-    <option value="annual_fee_asc">Sort: Fees (low → high)</option>
-    <option value="naac">Sort: NAAC ↓</option>
+  <select id="lbCity"><option value="">All cities</option></select>
+  <select id="lbSort">
+    <option value="elo_rating">Sort: Elo</option>
+    <option value="roi">Sort: ROI</option>
+    <option value="average_package">Sort: Package</option>
+    <option value="placement_percentage">Sort: Placement %</option>
+    <option value="annual_fee_asc">Sort: Fees (low→high)</option>
+    <option value="naac">Sort: NAAC</option>
   </select>
 </div>
 
 <div class="card">
-  <div class="section-title"><h2 id="lbCount">All colleges</h2><span class="muted small" id="lbHint"></span></div>
-  <div class="table-wrap">
-    <table class="leaderboard">
-      <thead>
-        <tr><th>#</th><th>College</th><th>Elo</th><th>Avg Package</th><th>Placement %</th><th>Fees / yr</th><th>ROI</th><th>NAAC</th></tr>
-      </thead>
-      <tbody id="lbBody">
-        <tr><td colspan="8"><div class="skeleton" style="height:22px"></div><div class="skeleton" style="height:22px;margin-top:8px"></div></td></tr>
-      </tbody>
-    </table>
+  <table class="leaderboard">
+    <thead>
+      <tr><th>#</th><th>College</th><th>Elo</th><th>Avg Package</th><th>Placement %</th><th>Fees</th><th>ROI</th><th>NAAC</th></tr>
+    </thead>
+    <tbody id="lbBody"></tbody>
+  </table>
+  <div class="pagination">
+    <button id="prevPage" class="page-btn" type="button" aria-label="Previous page"><span aria-hidden="true">←</span> Previous</button>
+    <span id="pageInfo"></span>
+    <button id="nextPage" class="page-btn" type="button" aria-label="Next page">Next <span aria-hidden="true">→</span></button>
   </div>
-  <div id="lbEmpty" class="empty hidden" style="margin-top:12px">No colleges match your filters. <button class="btn btn-sm" id="lbClear" type="button">Clear filters</button></div>
-  <div class="pagination"><button id="prevPage" type="button">← Prev</button><span id="pageInfo"></span><button id="nextPage" type="button">Next →</button></div>
 </div>
 
 <script id="collegesData" type="application/json">{{ colleges|tojson }}</script>
@@ -49,5 +40,5 @@
   window.__COLLEGES__ = JSON.parse(document.getElementById('collegesData').textContent);
 </script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-<script>document.addEventListener('DOMContentLoaded', initLeaderboard);</script>
+<script>initLeaderboard();</script>
 {% endblock %}
