@@ -82,10 +82,24 @@ Attempting to compare a directory college (or to compare across cohorts) returns
 Merge priority is `mumbai_curated > us_scorecard > hipolabs`, so a directory row can never
 overwrite a curated Mumbai college's real, cited data on re-ingest (ingestion is idempotent).
 
-## Other cohorts (later phases)
+## US College Scorecard Cohort (Shipped & Live)
 
-The genuinely rich, per-institution *metrics* come from the **US College Scorecard** — a US
-Government open API (median earnings, tuition, completion rate). That cohort is deferred to a
-later phase and is where a fully-metric-driven ranking would live. As with every cohort here,
-a college is only marked "ranked" when real metrics genuinely exist for it — nothing is
-invented.
+Alongside the curated Mumbai colleges and India directory, the app includes **US Universities** sourced from the official **US Department of Education College Scorecard API** (https://collegescorecard.ed.gov/). A committed offline snapshot lives at `data/snapshots/us_scorecard.json` and can be refreshed online using `python ingest.py --online`.
+
+| Field | Source | Meaning |
+|---|---|---|
+| `annual_fee` | `latest.cost.tuition.out_of_state` | Annual tuition and fees ($ USD) |
+| `average_package` | `latest.earnings.10_yrs_after_entry.median` | Median earnings 10 years post-entry ($ USD) |
+| `placement_percentage` | `latest.completion.rate_suppressed.overall` | Degree completion / graduation rate |
+| `courses` | `latest.programs.cip_4_digit` | Program offerings, degree levels & duration |
+
+## Courses & Fee Structure
+
+Colleges carry a structured `courses` attribute containing their programs of study:
+- **`course_name`**: e.g., B.Sc. Computer Science, B.Tech Information Technology, MBA, MS Computer Science
+- **`degree_level`**: Undergraduate / Postgraduate
+- **`duration`**: Program length (e.g. 3 Years, 4 Years, 2 Years)
+- **`annual_fee`**: Course-specific tuition fee
+- **`specialization`**: Concentration / track (e.g. Artificial Intelligence, Data Science, Finance)
+
+Ranked cohorts (`mumbai`, `us`) are ranked independently with currency-aware comparisons (`INR` and `USD`). Merge priority is `mumbai_curated > us_scorecard > hipolabs`.

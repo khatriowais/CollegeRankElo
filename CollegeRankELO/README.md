@@ -16,19 +16,36 @@ python -m venv .venv && source .venv/bin/activate       # Windows: .venv\Scripts
 # 2. Install requirements
 pip install -r requirements.txt
 
-# 3. Seed the database (first time only — auto-seed also runs from app.py)
+# 3. Configure environment (no more hard-coded secrets!)
+Copy-Item .env.example .env        # Windows PowerShell
+# cp .env.example .env             # macOS / Linux
+# Then edit .env: set SECRET_KEY, ADMIN_USERNAME, ADMIN_PASSWORD, etc.
+
+# 4. Seed the database (first time only — auto-seed also runs from app.py)
 python seed_database.py
 
-# 4. Run
+# 5. Run
 python app.py
 ```
 
 Open <http://localhost:5000>.
 
-To switch to Postgres set `DATABASE_URL`, e.g.
-`export DATABASE_URL=postgresql+psycopg2://user:pass@localhost/collegerankelo`.
+All configuration lives in `.env` (see `.env.example` for every key):
 
-Admin login: **`admin` / `admin123`**.
+| Key | Purpose | Default |
+|-----|---------|---------|
+| `SECRET_KEY` | Flask session secret | dev-only placeholder |
+| `ADMIN_USERNAME` / `ADMIN_PASSWORD` | Admin panel login | `admin` / `changeme` |
+| `DATABASE_URL` | SQLAlchemy URL (SQLite or Postgres) | `sqlite:///database/colleges.db` |
+| `PORT`, `FLASK_ENV` | Run port / mode | `5000` / `development` |
+| `ELO_K_FACTOR`, `ELO_START_RATING`, `DRAW_THRESHOLD` | Rating tunables | `32`, `1500`, `2.0` |
+| `WEIGHT_ROI`, `WEIGHT_PLACEMENT`, `WEIGHT_PACKAGE`, `WEIGHT_FEES`, `WEIGHT_NAAC` | Comparison weights (sum = 1) | `0.40/0.25/0.20/0.10/0.05` |
+| `DATA_FILE` | Seed JSON path | `data/mumbai_university_colleges.json` |
+
+For Postgres set `DATABASE_URL`, e.g.
+`DATABASE_URL=postgresql+psycopg2://user:pass@localhost:5432/collegerankelo`.
+
+Admin login comes from your `.env` (`ADMIN_USERNAME` / `ADMIN_PASSWORD`).
 
 ---
 
@@ -155,7 +172,7 @@ The weighted-score difference falls below the draw threshold (2 points) and we a
 Yes — SQLAlchemy is the ORM; only `DATABASE_URL` changes. No SQLite-specific SQL is used.
 
 **Q7. How is the admin panel secured?**
-Session-based login with a hard-coded credential (`admin` / `admin123`) plus a `login_required` decorator on every admin route. In production replace with a hashed-password `AdminUser` table.
+Session-based login with credentials from `.env` (`ADMIN_USERNAME` / `ADMIN_PASSWORD`) plus a `login_required` decorator on every admin route. No secrets are hard-coded; `.env` is git-ignored and `.env.example` documents every key.
 
 **Q8. What happens on “Recalculate all ratings”?**
 Every college is reset to 1500, `elo_history` is cleared, then all stored comparisons are replayed in chronological order. This lets you tune K or the weights and re-derive ratings deterministically.
@@ -180,7 +197,7 @@ Pure HTML + CSS + vanilla JS — no framework — with Chart.js for graphs. Jinj
 | PUT    | `/api/updateCollege/<id>` *(admin)* | update |
 | DELETE | `/api/deleteCollege/<id>` *(admin)* | delete |
 
-Admin routes require an active browser session (`admin`/`admin123`).
+Admin routes require an active browser session (login with your `.env` credentials).
 
 ---
 
@@ -189,6 +206,8 @@ Admin routes require an active browser session (`admin`/`admin123`).
 ```
 CollegeRankELO/
 ├── app.py
+├── config.py              # env-based settings (SECRET_KEY, admin, Elo tunables…)
+├── .env.example           # documented template — copy to .env
 ├── elo.py
 ├── compare.py
 ├── database.py
@@ -197,7 +216,7 @@ CollegeRankELO/
 ├── requirements.txt
 ├── README.md
 ├── templates/{index,leaderboard,compare,college,admin,about,_base,_macros}.html
-├── static/css/style.css
+├── static/css/style.css   # clean light/dark theme
 ├── static/js/{main,charts,compare}.js
 ├── database/colleges.db     (auto-created)
 └── data/mumbai_university_colleges.json

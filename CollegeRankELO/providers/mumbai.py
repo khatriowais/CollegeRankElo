@@ -63,6 +63,7 @@ class MumbaiProvider(BaseProvider):
                 website=_clean(row.get("website")),
                 logo=_clean(row.get("logo")),
                 source_url=_clean(row.get("source_url")),
+                courses=row.get("courses") or [],
                 annual_fee=_clean(row.get("annual_fee")),
                 average_package=_clean(row.get("average_package")),
                 highest_package=_clean(row.get("highest_package")),

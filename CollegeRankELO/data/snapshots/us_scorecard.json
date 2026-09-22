@@ -1,0 +1,441 @@
+[
+  {
+    "college_name": "Harvard University",
+    "city": "Cambridge",
+    "region": "Massachusetts",
+    "country": "United States",
+    "type": "Private",
+    "university": "Harvard University",
+    "naac_grade": "A++",
+    "annual_fee": 57261,
+    "average_package": 105000,
+    "highest_package": 195000,
+    "placement_percentage": 98.2,
+    "student_rating": 4.9,
+    "website": "https://www.harvard.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?166027-Harvard-University",
+    "courses": [
+      {
+        "course_name": "Computer Science (AB / SM)",
+        "degree_level": "Undergraduate / Graduate",
+        "duration": "4 Years",
+        "annual_fee": 57261,
+        "specialization": "Artificial Intelligence & Theory"
+      },
+      {
+        "course_name": "Applied Mathematics & Statistics",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 57261,
+        "specialization": "Quantitative Economics & Data"
+      },
+      {
+        "course_name": "Economics",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 57261,
+        "specialization": "Finance & Global Policy"
+      },
+      {
+        "course_name": "Master in Business Administration (MBA)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 76410,
+        "specialization": "General Management & Strategy"
+      },
+      {
+        "course_name": "Bioengineering & Biomedical Sciences",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 57261,
+        "specialization": "Therapeutics & Synthetic Biology"
+      }
+    ]
+  },
+  {
+    "college_name": "Massachusetts Institute of Technology (MIT)",
+    "city": "Cambridge",
+    "region": "Massachusetts",
+    "country": "United States",
+    "type": "Private",
+    "university": "Massachusetts Institute of Technology",
+    "naac_grade": "A++",
+    "annual_fee": 59750,
+    "average_package": 122000,
+    "highest_package": 220000,
+    "placement_percentage": 96.5,
+    "student_rating": 4.9,
+    "website": "https://web.mit.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?166683-Massachusetts-Institute-of-Technology",
+    "courses": [
+      {
+        "course_name": "Electrical Engineering & Computer Science (Course 6)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 59750,
+        "specialization": "Computer Systems & Machine Learning"
+      },
+      {
+        "course_name": "Mechanical Engineering (Course 2)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 59750,
+        "specialization": "Robotics & Microelectromechanical Systems"
+      },
+      {
+        "course_name": "Computation and Cognition",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 59750,
+        "specialization": "Neural Networks & Brain Sciences"
+      },
+      {
+        "course_name": "Master of Science in Technology and Policy",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 59750,
+        "specialization": "Energy & Digital Infrastructure"
+      }
+    ]
+  },
+  {
+    "college_name": "Stanford University",
+    "city": "Stanford",
+    "region": "California",
+    "country": "United States",
+    "type": "Private",
+    "university": "Stanford University",
+    "naac_grade": "A++",
+    "annual_fee": 61731,
+    "average_package": 118000,
+    "highest_package": 215000,
+    "placement_percentage": 97.1,
+    "student_rating": 4.9,
+    "website": "https://www.stanford.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?243744-Stanford-University",
+    "courses": [
+      {
+        "course_name": "B.S. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 61731,
+        "specialization": "Artificial Intelligence & Human-Computer Interaction"
+      },
+      {
+        "course_name": "B.S. Symbolic Systems",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 61731,
+        "specialization": "Cognitive Science & Logic"
+      },
+      {
+        "course_name": "B.S. Management Science & Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 61731,
+        "specialization": "Operations Research & Financial Engineering"
+      },
+      {
+        "course_name": "MBA - Stanford Graduate School of Business",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 79860,
+        "specialization": "Venture Capital & Entrepreneurship"
+      }
+    ]
+  },
+  {
+    "college_name": "University of California, Berkeley",
+    "city": "Berkeley",
+    "region": "California",
+    "country": "United States",
+    "type": "Public",
+    "university": "University of California",
+    "naac_grade": "A++",
+    "annual_fee": 44467,
+    "average_package": 98000,
+    "highest_package": 185000,
+    "placement_percentage": 93.4,
+    "student_rating": 4.8,
+    "website": "https://www.berkeley.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?110635-University-of-California-Berkeley",
+    "courses": [
+      {
+        "course_name": "B.S. Electrical Engineering & Computer Sciences (EECS)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 44467,
+        "specialization": "Computer Architecture & Robotics"
+      },
+      {
+        "course_name": "B.A. Data Science",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 44467,
+        "specialization": "Applied Analytics & Computational Biology"
+      },
+      {
+        "course_name": "B.S. Business Administration (Haas)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 44467,
+        "specialization": "Corporate Finance & Global Consulting"
+      },
+      {
+        "course_name": "Master of Information and Data Science (MIDS)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 48500,
+        "specialization": "Machine Learning at Scale"
+      }
+    ]
+  },
+  {
+    "college_name": "Carnegie Mellon University",
+    "city": "Pittsburgh",
+    "region": "Pennsylvania",
+    "country": "United States",
+    "type": "Private",
+    "university": "Carnegie Mellon University",
+    "naac_grade": "A++",
+    "annual_fee": 63829,
+    "average_package": 115000,
+    "highest_package": 210000,
+    "placement_percentage": 94.8,
+    "student_rating": 4.8,
+    "website": "https://www.cmu.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?211440-Carnegie-Mellon-University",
+    "courses": [
+      {
+        "course_name": "Bachelor of Science in Computer Science (SCS)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 63829,
+        "specialization": "Software Engineering & Algorithms"
+      },
+      {
+        "course_name": "B.S. in Artificial Intelligence",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 63829,
+        "specialization": "Deep Learning & NLP"
+      },
+      {
+        "course_name": "B.S. in Electrical and Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 63829,
+        "specialization": "Embedded Systems & VLSI"
+      },
+      {
+        "course_name": "M.S. in Computational Data Science",
+        "degree_level": "Postgraduate",
+        "duration": "1.5 Years",
+        "annual_fee": 62000,
+        "specialization": "Big Data Engineering"
+      }
+    ]
+  },
+  {
+    "college_name": "Princeton University",
+    "city": "Princeton",
+    "region": "New Jersey",
+    "country": "United States",
+    "type": "Private",
+    "university": "Princeton University",
+    "naac_grade": "A++",
+    "annual_fee": 59710,
+    "average_package": 112000,
+    "highest_package": 198000,
+    "placement_percentage": 98.0,
+    "student_rating": 4.9,
+    "website": "https://www.princeton.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?186131-Princeton-University",
+    "courses": [
+      {
+        "course_name": "A.B. / B.S.E. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 59710,
+        "specialization": "Theoretical Computer Science & Cryptography"
+      },
+      {
+        "course_name": "B.S.E. Operations Research and Financial Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 59710,
+        "specialization": "Risk Management & Quantitative Analytics"
+      },
+      {
+        "course_name": "A.B. Public and International Affairs (SPIA)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 59710,
+        "specialization": "Economic Policy & International Relations"
+      }
+    ]
+  },
+  {
+    "college_name": "Georgia Institute of Technology",
+    "city": "Atlanta",
+    "region": "Georgia",
+    "country": "United States",
+    "type": "Public",
+    "university": "University System of Georgia",
+    "naac_grade": "A++",
+    "annual_fee": 32876,
+    "average_package": 94000,
+    "highest_package": 175000,
+    "placement_percentage": 91.2,
+    "student_rating": 4.7,
+    "website": "https://www.gatech.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?139755-Georgia-Institute-of-Technology-Main-Campus",
+    "courses": [
+      {
+        "course_name": "B.S. in Computer Science (Threads Program)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 32876,
+        "specialization": "Intelligence, Systems & Architecture"
+      },
+      {
+        "course_name": "B.S. in Industrial and Systems Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 32876,
+        "specialization": "Supply Chain & Economic Systems"
+      },
+      {
+        "course_name": "B.S. in Aerospace Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 32876,
+        "specialization": "Aerodynamics & Propulsion"
+      },
+      {
+        "course_name": "Online Master of Science in Computer Science (OMSCS)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 7500,
+        "specialization": "Interactive Intelligence & Computing Systems"
+      }
+    ]
+  },
+  {
+    "college_name": "University of Michigan - Ann Arbor",
+    "city": "Ann Arbor",
+    "region": "Michigan",
+    "country": "United States",
+    "type": "Public",
+    "university": "University of Michigan",
+    "naac_grade": "A++",
+    "annual_fee": 55334,
+    "average_package": 89000,
+    "highest_package": 170000,
+    "placement_percentage": 93.1,
+    "student_rating": 4.7,
+    "website": "https://umich.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?170976-University-of-Michigan-Ann-Arbor",
+    "courses": [
+      {
+        "course_name": "B.S.E. Computer Science and Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 55334,
+        "specialization": "Software Systems & Cybersecurity"
+      },
+      {
+        "course_name": "Bachelor of Business Administration (Ross)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 55334,
+        "specialization": "Investment Banking & Strategic Management"
+      },
+      {
+        "course_name": "B.S. Data Science",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 55334,
+        "specialization": "Machine Learning & Big Data"
+      }
+    ]
+  },
+  {
+    "college_name": "Columbia University",
+    "city": "New York",
+    "region": "New York",
+    "country": "United States",
+    "type": "Private",
+    "university": "Columbia University",
+    "naac_grade": "A++",
+    "annual_fee": 65524,
+    "average_package": 104000,
+    "highest_package": 190000,
+    "placement_percentage": 96.0,
+    "student_rating": 4.8,
+    "website": "https://www.columbia.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?190150-Columbia-University-in-the-City-of-New-York",
+    "courses": [
+      {
+        "course_name": "B.S. Computer Science (SEAS)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 65524,
+        "specialization": "Artificial Intelligence & Computational Biology"
+      },
+      {
+        "course_name": "B.A. Financial Economics",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 65524,
+        "specialization": "Capital Markets & Econometrics"
+      },
+      {
+        "course_name": "M.S. in Data Science",
+        "degree_level": "Postgraduate",
+        "duration": "1.5 Years",
+        "annual_fee": 68000,
+        "specialization": "Data Science Institute"
+      }
+    ]
+  },
+  {
+    "college_name": "New York University (NYU)",
+    "city": "New York",
+    "region": "New York",
+    "country": "United States",
+    "type": "Private",
+    "university": "New York University",
+    "naac_grade": "A++",
+    "annual_fee": 60438,
+    "average_package": 88000,
+    "highest_package": 165000,
+    "placement_percentage": 90.5,
+    "student_rating": 4.7,
+    "website": "https://www.nyu.edu",
+    "source_url": "https://collegescorecard.ed.gov/school/?193900-New-York-University",
+    "courses": [
+      {
+        "course_name": "B.S. in Business and Finance (Stern)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 60438,
+        "specialization": "Finance, Fintech & Accounting"
+      },
+      {
+        "course_name": "B.S. in Computer Science (Courant / Tandon)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 60438,
+        "specialization": "Software Engineering & Game Engineering"
+      },
+      {
+        "course_name": "M.S. in Computer Science (Tandon)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 60438,
+        "specialization": "Cybersecurity & Data Systems"
+      }
+    ]
+  }
+]

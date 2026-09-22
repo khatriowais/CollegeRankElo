@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
-  <title id="title">CollegeELO mark</title>
-  <desc id="desc">A navy circular C beside three ascending blue ranking bars.</desc>
-  <rect width="64" height="64" rx="14" fill="#fff"/>
-  <path d="M42 13c-5-4-11-5-17-4C14 11 6 20 5 32c-1 12 6 23 17 28l8-14c-5-2-8-7-8-13 0-8 6-14 14-14 4 0 7 2 10 5l10-9-14-12Z" fill="#172538"/>
-  <path d="M39 23h19l-4 8H35l4-8Z" fill="#168cff"/>
-  <path d="M37 33h19l-4 8H33l4-8Z" fill="#429fe9"/>
-  <path d="M34 43h19l-4 8H30l4-8Z" fill="#80bbed"/>
-</svg>

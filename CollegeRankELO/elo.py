@@ -16,9 +16,19 @@ from dataclasses import dataclass
 
 
 class EloConfig:
-    """Global Elo configuration used across the app."""
-    START_RATING: int = 1500
-    K_FACTOR: int = 32
+    """Global Elo configuration — overridable via environment (.env)."""
+    try:
+        from config import settings as _s  # type: ignore
+        START_RATING: float = _s.elo_start_rating  # type: ignore
+        K_FACTOR: int = _s.elo_k_factor  # type: ignore
+    except Exception:
+        START_RATING: float = 1500  # type: ignore
+        K_FACTOR: int = 32  # type: ignore
+
+
+# Backwards-compatible module constants.
+START_RATING = EloConfig.START_RATING
+K_FACTOR = EloConfig.K_FACTOR
 
 
 @dataclass
@@ -32,7 +42,13 @@ class EloResult:
 class EloService:
     """Stateless service that performs Elo calculations."""
 
-    def __init__(self, k: int = EloConfig.K_FACTOR) -> None:
+    def __init__(self, k: int | None = None) -> None:
+        if k is None:
+            try:
+                from config import settings as _s  # type: ignore
+                k = _s.elo_k_factor
+            except Exception:
+                k = EloConfig.K_FACTOR
         self.k = k
 
     def expected(self, rating_a: float, rating_b: float) -> float:

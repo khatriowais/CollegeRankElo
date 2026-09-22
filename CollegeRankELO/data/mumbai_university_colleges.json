@@ -1,1282 +1,1714 @@
 [
   {
-    "id": 1,
-    "college_name": "St. Xavier's College",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 188,
-    "annual_fee": 139088,
-    "average_package": 1128004,
-    "highest_package": 4358221,
-    "placement_percentage": 57.1,
-    "student_rating": 4.2,
-    "website": "https://www.example.edu/1",
-    "logo": ""
-  },
-  {
-    "id": 2,
-    "college_name": "K J Somaiya College of Arts & Commerce",
-    "city": "Navi Mumbai",
-    "type": "Private",
+    "college_name": "St. Xavier's College, Mumbai",
+    "city": "Mumbai",
+    "locality": "Fort",
+    "type": "Aided",
     "university": "University of Mumbai",
     "naac_grade": "A+",
-    "nirf_rank": 47,
-    "annual_fee": 172563,
-    "average_package": 378634,
-    "highest_package": 1239122,
-    "placement_percentage": 73.6,
-    "student_rating": 4.2,
-    "website": "https://www.example.edu/2",
-    "logo": ""
+    "nirf_rank": 87,
+    "annual_fee": 38500,
+    "average_package": 650000,
+    "highest_package": 1800000,
+    "placement_percentage": 82.5,
+    "student_rating": 4.8,
+    "website": "https://xaviers.edu",
+    "source_url": "https://en.wikipedia.org/wiki/St._Xavier%27s_College,_Mumbai",
+    "courses": [
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 48000,
+        "specialization": "Information Security & Cloud"
+      },
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 45000,
+        "specialization": "Data Science & AI"
+      },
+      {
+        "course_name": "Bachelor of Management Studies (BMS)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 42000,
+        "specialization": "Marketing & Finance"
+      },
+      {
+        "course_name": "Bachelor of Mass Media (BMM)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 40000,
+        "specialization": "Journalism & Advertising"
+      },
+      {
+        "course_name": "B.A. Economics & Psychology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 22000,
+        "specialization": "Behavioral Economics"
+      }
+    ]
   },
   {
-    "id": 3,
-    "college_name": "Thakur College of Science & Commerce",
-    "city": "Mumbai",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 300,
-    "annual_fee": 33528,
-    "average_package": 559631,
-    "highest_package": 1995963,
-    "placement_percentage": 82.1,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/3",
-    "logo": ""
-  },
-  {
-    "id": 4,
-    "college_name": "Mithibai College",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 293,
-    "annual_fee": 84422,
-    "average_package": 579287,
-    "highest_package": 2293996,
-    "placement_percentage": 73.0,
-    "student_rating": 3.8,
-    "website": "https://www.example.edu/4",
-    "logo": ""
-  },
-  {
-    "id": 5,
-    "college_name": "Jai Hind College",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 50,
-    "annual_fee": 154752,
-    "average_package": 516123,
-    "highest_package": 3455530,
-    "placement_percentage": 79.6,
-    "student_rating": 4.2,
-    "website": "https://www.example.edu/5",
-    "logo": ""
-  },
-  {
-    "id": 6,
-    "college_name": "Wilson College",
-    "city": "Panvel",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 239,
-    "annual_fee": 16953,
-    "average_package": 731926,
-    "highest_package": 3314039,
-    "placement_percentage": 84.3,
-    "student_rating": 4.2,
-    "website": "https://www.example.edu/6",
-    "logo": ""
-  },
-  {
-    "id": 7,
-    "college_name": "Rizvi College of Arts, Science & Commerce",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 295,
-    "annual_fee": 217164,
-    "average_package": 820988,
-    "highest_package": 2074984,
-    "placement_percentage": 85.1,
-    "student_rating": 3.8,
-    "website": "https://www.example.edu/7",
-    "logo": ""
-  },
-  {
-    "id": 8,
-    "college_name": "Bhavan's College",
-    "city": "Navi Mumbai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 263,
-    "annual_fee": 240080,
-    "average_package": 1241273,
-    "highest_package": 2948971,
-    "placement_percentage": 81.2,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/8",
-    "logo": ""
-  },
-  {
-    "id": 9,
-    "college_name": "Ramniranjan Jhunjhunwala College",
-    "city": "Navi Mumbai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 294,
-    "annual_fee": 139683,
-    "average_package": 1325429,
-    "highest_package": 3594160,
-    "placement_percentage": 56.7,
-    "student_rating": 4.5,
-    "website": "https://www.example.edu/9",
-    "logo": ""
-  },
-  {
-    "id": 10,
-    "college_name": "Vivekanand Education Society's College of Arts, Science & Commerce",
-    "city": "Ulhasnagar",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 48,
-    "annual_fee": 238322,
-    "average_package": 1034377,
-    "highest_package": 4027344,
-    "placement_percentage": 76.4,
-    "student_rating": 4.7,
-    "website": "https://www.example.edu/10",
-    "logo": ""
-  },
-  {
-    "id": 11,
-    "college_name": "SIES College of Arts, Science & Commerce",
-    "city": "Ulhasnagar",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 198,
-    "annual_fee": 94078,
-    "average_package": 427233,
-    "highest_package": 3869503,
-    "placement_percentage": 68.3,
-    "student_rating": 4.6,
-    "website": "https://www.example.edu/11",
-    "logo": ""
-  },
-  {
-    "id": 12,
     "college_name": "Ramnarain Ruia Autonomous College",
-    "city": "Ulhasnagar",
-    "type": "Private",
+    "city": "Mumbai",
+    "locality": "Matunga",
+    "type": "Aided",
     "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 112,
-    "annual_fee": 302061,
-    "average_package": 1045462,
-    "highest_package": 2250307,
-    "placement_percentage": 81.3,
-    "student_rating": 4.5,
-    "website": "https://www.example.edu/12",
-    "logo": ""
+    "naac_grade": "A+",
+    "nirf_rank": 95,
+    "annual_fee": 32000,
+    "average_package": 520000,
+    "highest_package": 1200000,
+    "placement_percentage": 78.0,
+    "student_rating": 4.6,
+    "website": "https://ruiacollege.edu",
+    "source_url": "https://en.wikipedia.org/wiki/Ramnarain_Ruia_College",
+    "courses": [
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Data Analytics"
+      },
+      {
+        "course_name": "B.Sc. Bioanalytical Sciences",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 34000,
+        "specialization": "Pharma Chemistry"
+      },
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 42000,
+        "specialization": "Software Engineering"
+      }
+    ]
   },
   {
-    "id": 13,
-    "college_name": "Sathaye College",
-    "city": "Ulhasnagar",
-    "type": "Government",
+    "college_name": "R. A. Podar College of Commerce and Economics",
+    "city": "Mumbai",
+    "locality": "Matunga",
+    "type": "Aided",
     "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 86,
-    "annual_fee": 23113,
-    "average_package": 1134451,
-    "highest_package": 3274212,
-    "placement_percentage": 94.4,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/13",
-    "logo": ""
+    "naac_grade": "A+",
+    "nirf_rank": null,
+    "annual_fee": 28000,
+    "average_package": 580000,
+    "highest_package": 1400000,
+    "placement_percentage": 84.0,
+    "student_rating": 4.7,
+    "website": "https://www.rapodar.ac.in",
+    "source_url": "https://www.rapodar.ac.in",
+    "courses": [
+      {
+        "course_name": "Bachelor of Commerce (B.Com)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 18000,
+        "specialization": "Accounting & Auditing"
+      },
+      {
+        "course_name": "Bachelor of Management Studies (BMS)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Finance & Strategy"
+      },
+      {
+        "course_name": "B.Com Accounting & Finance (BAF)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 35000,
+        "specialization": "Financial Reporting"
+      }
+    ]
   },
   {
-    "id": 14,
-    "college_name": "Guru Nanak Khalsa College",
-    "city": "Panvel",
-    "type": "Private",
+    "college_name": "Narsee Monjee College of Commerce and Economics (NM College)",
+    "city": "Mumbai",
+    "locality": "Vile Parle",
+    "type": "Aided",
     "university": "University of Mumbai",
     "naac_grade": "A",
-    "nirf_rank": 195,
-    "annual_fee": 131788,
-    "average_package": 1202869,
-    "highest_package": 4010657,
-    "placement_percentage": 67.0,
+    "nirf_rank": null,
+    "annual_fee": 35000,
+    "average_package": 620000,
+    "highest_package": 1600000,
+    "placement_percentage": 86.0,
     "student_rating": 4.7,
-    "website": "https://www.example.edu/14",
-    "logo": ""
+    "website": "https://www.nmcollege.in",
+    "source_url": "https://en.wikipedia.org/wiki/Narsee_Monjee_College_of_Commerce_and_Economics",
+    "courses": [
+      {
+        "course_name": "B.Com Financial Markets (BFM)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 42000,
+        "specialization": "Equity Research"
+      },
+      {
+        "course_name": "B.Com Accounting & Finance (BAF)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 40000,
+        "specialization": "Auditing & Taxation"
+      },
+      {
+        "course_name": "Bachelor of Management Studies (BMS)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 45000,
+        "specialization": "Finance & Marketing"
+      }
+    ]
   },
   {
-    "id": 15,
+    "college_name": "Mithibai College of Arts, Chauhan Institute of Science & Commerce",
+    "city": "Mumbai",
+    "locality": "Vile Parle",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 36000,
+    "average_package": 590000,
+    "highest_package": 1500000,
+    "placement_percentage": 81.0,
+    "student_rating": 4.6,
+    "website": "https://mithibai.ac.in",
+    "source_url": "https://en.wikipedia.org/wiki/Mithibai_College",
+    "courses": [
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 42000,
+        "specialization": "AI & Big Data"
+      },
+      {
+        "course_name": "B.Sc. Biotechnology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 45000,
+        "specialization": "Genomics"
+      },
+      {
+        "course_name": "BAMMC (Mass Media)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 40000,
+        "specialization": "Advertising & PR"
+      }
+    ]
+  },
+  {
+    "college_name": "Jai Hind College",
+    "city": "Mumbai",
+    "locality": "Churchgate",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 39000,
+    "average_package": 640000,
+    "highest_package": 1700000,
+    "placement_percentage": 83.0,
+    "student_rating": 4.7,
+    "website": "https://www.jaihindcollege.com",
+    "source_url": "https://en.wikipedia.org/wiki/Jai_Hind_College",
+    "courses": [
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 46000,
+        "specialization": "Full Stack Dev"
+      },
+      {
+        "course_name": "Bachelor of Management Studies (BMS)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 44000,
+        "specialization": "Leadership & Strategy"
+      },
+      {
+        "course_name": "B.Voc Software Development",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Web Architecture"
+      }
+    ]
+  },
+  {
+    "college_name": "H. R. College of Commerce and Economics",
+    "city": "Mumbai",
+    "locality": "Churchgate",
+    "type": "Aided",
+    "university": "HSNC University",
+    "naac_grade": "A+",
+    "nirf_rank": null,
+    "annual_fee": 34000,
+    "average_package": 630000,
+    "highest_package": 1650000,
+    "placement_percentage": 85.0,
+    "student_rating": 4.8,
+    "website": "https://www.hrcollege.edu",
+    "source_url": "https://www.hrcollege.edu",
+    "courses": [
+      {
+        "course_name": "B.Com Banking & Insurance (BBI)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 36000,
+        "specialization": "Commercial Banking"
+      },
+      {
+        "course_name": "Bachelor of Management Studies (BMS)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 42000,
+        "specialization": "Wealth Management"
+      },
+      {
+        "course_name": "B.Com Accounting & Finance (BAF)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Auditing & Tax"
+      }
+    ]
+  },
+  {
+    "college_name": "Kishinchand Chellaram College (KC College)",
+    "city": "Mumbai",
+    "locality": "Churchgate",
+    "type": "Aided",
+    "university": "HSNC University",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 31000,
+    "average_package": 510000,
+    "highest_package": 1150000,
+    "placement_percentage": 76.0,
+    "student_rating": 4.5,
+    "website": "https://kccollege.edu.in",
+    "source_url": "https://en.wikipedia.org/wiki/Kishinchand_Chellaram_College",
+    "courses": [
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 36000,
+        "specialization": "Cybersecurity"
+      },
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 40000,
+        "specialization": "Cloud Platforms"
+      },
+      {
+        "course_name": "B.A. Mass Media (BMM)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 37000,
+        "specialization": "Broadcast Journalism"
+      }
+    ]
+  },
+  {
+    "college_name": "Wilson College, Mumbai",
+    "city": "Mumbai",
+    "locality": "Girgaon",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 26000,
+    "average_package": 460000,
+    "highest_package": 1000000,
+    "placement_percentage": 73.0,
+    "student_rating": 4.5,
+    "website": "https://www.wilsoncollege.edu",
+    "source_url": "https://en.wikipedia.org/wiki/Wilson_College,_Mumbai",
+    "courses": [
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Networking & Systems"
+      },
+      {
+        "course_name": "B.Sc. Microbiology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 28000,
+        "specialization": "Clinical Microbiology"
+      },
+      {
+        "course_name": "B.A. English Literature & History",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 18000,
+        "specialization": "Humanities"
+      }
+    ]
+  },
+  {
+    "college_name": "Sophia College for Women",
+    "city": "Mumbai",
+    "locality": "Bhulabhai Desai Road",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A+",
+    "nirf_rank": null,
+    "annual_fee": 26000,
+    "average_package": 450000,
+    "highest_package": 1000000,
+    "placement_percentage": 75.0,
+    "student_rating": 4.6,
+    "website": "https://www.sophiacollegemumbai.com",
+    "source_url": "https://en.wikipedia.org/wiki/Sophia_College_for_Women",
+    "courses": [
+      {
+        "course_name": "B.A. Psychology & Sociology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 24000,
+        "specialization": "Clinical Psychology"
+      },
+      {
+        "course_name": "B.Sc. Biochemistry",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 28000,
+        "specialization": "Biochemical Analysis"
+      },
+      {
+        "course_name": "B.A. Multimedia and Mass Communication (BAMMC)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 36000,
+        "specialization": "Media & PR"
+      }
+    ]
+  },
+  {
+    "college_name": "Sydenham College of Commerce and Economics",
+    "city": "Mumbai",
+    "locality": "Churchgate",
+    "type": "Government",
+    "university": "University of Mumbai",
+    "naac_grade": "A+",
+    "nirf_rank": null,
+    "annual_fee": 16000,
+    "average_package": 520000,
+    "highest_package": 1250000,
+    "placement_percentage": 79.0,
+    "student_rating": 4.6,
+    "website": "https://www.sydenham.ac.in",
+    "source_url": "https://www.sydenham.ac.in",
+    "courses": [
+      {
+        "course_name": "Bachelor of Commerce (B.Com)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 12000,
+        "specialization": "Accountancy & Business Management"
+      },
+      {
+        "course_name": "B.Com Banking & Insurance (BBI)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 28000,
+        "specialization": "Retail & Digital Banking"
+      },
+      {
+        "course_name": "Bachelor of Management Studies (BMS)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 32000,
+        "specialization": "Marketing Management"
+      }
+    ]
+  },
+  {
+    "college_name": "Elphinstone College",
+    "city": "Mumbai",
+    "locality": "Fort",
+    "type": "Government",
+    "university": "Dr. Homi Bhabha State University",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 14000,
+    "average_package": 420000,
+    "highest_package": 900000,
+    "placement_percentage": 71.0,
+    "student_rating": 4.4,
+    "website": "https://elphinstone.ac.in",
+    "source_url": "https://en.wikipedia.org/wiki/Elphinstone_College",
+    "courses": [
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 26000,
+        "specialization": "Database Administration"
+      },
+      {
+        "course_name": "B.Sc. Biotechnology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 28000,
+        "specialization": "Cell Biology"
+      },
+      {
+        "course_name": "B.A. Ancient Indian Culture & History",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 12000,
+        "specialization": "Archaeology & Heritage"
+      }
+    ]
+  },
+  {
+    "college_name": "D. G. Ruparel College of Arts, Science and Commerce",
+    "city": "Mumbai",
+    "locality": "Mahim",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 27000,
+    "average_package": 480000,
+    "highest_package": 1100000,
+    "placement_percentage": 74.0,
+    "student_rating": 4.5,
+    "website": "https://www.ruparel.edu",
+    "source_url": "https://www.ruparel.edu",
+    "courses": [
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 35000,
+        "specialization": "Programming & Data Structures"
+      },
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Software Development"
+      },
+      {
+        "course_name": "BMS Management Studies",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 36000,
+        "specialization": "Marketing & Finance"
+      }
+    ]
+  },
+  {
+    "college_name": "K. J. Somaiya College of Arts & Commerce",
+    "city": "Mumbai",
+    "locality": "Vidyavihar",
+    "type": "Aided",
+    "university": "Somaiya Vidyavihar University",
+    "naac_grade": "A+",
+    "nirf_rank": null,
+    "annual_fee": 35000,
+    "average_package": 550000,
+    "highest_package": 1300000,
+    "placement_percentage": 80.0,
+    "student_rating": 4.6,
+    "website": "https://kjsac.somaiya.edu",
+    "source_url": "https://kjsac.somaiya.edu",
+    "courses": [
+      {
+        "course_name": "Bachelor of Commerce (B.Com)",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 22000,
+        "specialization": "Accounting & Finance"
+      },
+      {
+        "course_name": "B.Com Banking & Insurance",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 35000,
+        "specialization": "Financial Markets"
+      },
+      {
+        "course_name": "B.A. Mass Communication & Journalism",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Media Writing"
+      }
+    ]
+  },
+  {
+    "college_name": "Thakur College of Science and Commerce",
+    "city": "Mumbai",
+    "locality": "Kandivali",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 42000,
+    "average_package": 460000,
+    "highest_package": 1050000,
+    "placement_percentage": 73.5,
+    "student_rating": 4.4,
+    "website": "https://www.tcsc.edu.in",
+    "source_url": "https://www.tcsc.edu.in",
+    "courses": [
+      {
+        "course_name": "B.Sc. Aviation",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 65000,
+        "specialization": "Flight Operations"
+      },
+      {
+        "course_name": "B.Sc. Data Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 52000,
+        "specialization": "Python & Analytics"
+      },
+      {
+        "course_name": "B.Sc. Animation & VFX",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 55000,
+        "specialization": "3D Modeling"
+      }
+    ]
+  },
+  {
+    "college_name": "SIES College of Arts, Science and Commerce",
+    "city": "Mumbai",
+    "locality": "Sion",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 31000,
+    "average_package": 510000,
+    "highest_package": 1150000,
+    "placement_percentage": 76.0,
+    "student_rating": 4.5,
+    "website": "https://siesascs.edu.in",
+    "source_url": "https://siesascs.edu.in",
+    "courses": [
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 36000,
+        "specialization": "Database Systems"
+      },
+      {
+        "course_name": "B.Sc. Biotechnology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 40000,
+        "specialization": "Microbial Genetics"
+      },
+      {
+        "course_name": "B.Com Accounting & Finance",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 34000,
+        "specialization": "Taxation"
+      }
+    ]
+  },
+  {
+    "college_name": "Bhavan's College",
+    "city": "Mumbai",
+    "locality": "Andheri West",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 29000,
+    "average_package": 470000,
+    "highest_package": 1050000,
+    "placement_percentage": 74.0,
+    "student_rating": 4.5,
+    "website": "https://bhavans.ac.in",
+    "source_url": "https://bhavans.ac.in",
+    "courses": [
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Web Development"
+      },
+      {
+        "course_name": "B.Sc. Microbiology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 26000,
+        "specialization": "Immunology"
+      },
+      {
+        "course_name": "BMS Management Studies",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 36000,
+        "specialization": "Marketing"
+      }
+    ]
+  },
+  {
+    "college_name": "Guru Nanak Khalsa College of Arts, Science and Commerce",
+    "city": "Mumbai",
+    "locality": "Matunga",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 30000,
+    "average_package": 490000,
+    "highest_package": 1100000,
+    "placement_percentage": 75.0,
+    "student_rating": 4.5,
+    "website": "https://gnkhalsa.edu.in",
+    "source_url": "https://gnkhalsa.edu.in",
+    "courses": [
+      {
+        "course_name": "B.Sc. Bioanalytical Sciences",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 36000,
+        "specialization": "Clinical Research"
+      },
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "Software Engineering"
+      },
+      {
+        "course_name": "B.Com Accounting & Finance",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 34000,
+        "specialization": "Auditing"
+      }
+    ]
+  },
+  {
+    "college_name": "Sathaye College",
+    "city": "Mumbai",
+    "locality": "Vile Parle",
+    "type": "Aided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 28000,
+    "average_package": 460000,
+    "highest_package": 1000000,
+    "placement_percentage": 73.0,
+    "student_rating": 4.4,
+    "website": "https://sathayecollege.edu.in",
+    "source_url": "https://sathayecollege.edu.in",
+    "courses": [
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 37000,
+        "specialization": "Cloud & Dev"
+      },
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 35000,
+        "specialization": "Data Structures"
+      },
+      {
+        "course_name": "BAMMC Mass Media",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 33000,
+        "specialization": "Journalism"
+      }
+    ]
+  },
+  {
     "college_name": "Kirti M. Doongursee College",
     "city": "Mumbai",
-    "type": "Private",
+    "locality": "Dadar",
+    "type": "Aided",
     "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 94,
-    "annual_fee": 152388,
-    "average_package": 617295,
-    "highest_package": 2090192,
-    "placement_percentage": 83.3,
-    "student_rating": 3.8,
-    "website": "https://www.example.edu/15",
-    "logo": ""
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 27000,
+    "average_package": 440000,
+    "highest_package": 950000,
+    "placement_percentage": 71.5,
+    "student_rating": 4.3,
+    "website": "https://kirticollege.edu.in",
+    "source_url": "https://kirticollege.edu.in",
+    "courses": [
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 36000,
+        "specialization": "Network Admin"
+      },
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 34000,
+        "specialization": "Database Engineering"
+      },
+      {
+        "course_name": "BMS Management Studies",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 35000,
+        "specialization": "Human Resources"
+      }
+    ]
   },
   {
-    "id": 16,
     "college_name": "Patkar-Varde College",
-    "city": "Thane",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "B",
-    "nirf_rank": 264,
-    "annual_fee": 28728,
-    "average_package": 1074380,
-    "highest_package": 4132118,
-    "placement_percentage": 79.4,
-    "student_rating": 4.7,
-    "website": "https://www.example.edu/16",
-    "logo": ""
-  },
-  {
-    "id": 17,
-    "college_name": "H R College of Commerce & Economics",
-    "city": "Panvel",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 205,
-    "annual_fee": 88307,
-    "average_package": 1257651,
-    "highest_package": 4612189,
-    "placement_percentage": 89.3,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/17",
-    "logo": ""
-  },
-  {
-    "id": 18,
-    "college_name": "N M College of Commerce & Economics",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 84,
-    "annual_fee": 269947,
-    "average_package": 430543,
-    "highest_package": 1730017,
-    "placement_percentage": 57.9,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/18",
-    "logo": ""
-  },
-  {
-    "id": 19,
-    "college_name": "Sydenham College of Commerce & Economics",
-    "city": "Navi Mumbai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 14,
-    "annual_fee": 113676,
-    "average_package": 300489,
-    "highest_package": 3177751,
-    "placement_percentage": 61.5,
-    "student_rating": 3.5,
-    "website": "https://www.example.edu/19",
-    "logo": ""
-  },
-  {
-    "id": 20,
-    "college_name": "R A Podar College of Commerce & Economics",
-    "city": "Dombivli",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 187,
-    "annual_fee": 257252,
-    "average_package": 611532,
-    "highest_package": 3772438,
-    "placement_percentage": 65.8,
-    "student_rating": 4.1,
-    "website": "https://www.example.edu/20",
-    "logo": ""
-  },
-  {
-    "id": 21,
-    "college_name": "Elphinstone College",
-    "city": "Navi Mumbai",
-    "type": "Government",
+    "city": "Mumbai",
+    "locality": "Goregaon",
+    "type": "Aided",
     "university": "University of Mumbai",
     "naac_grade": "A+",
-    "nirf_rank": 53,
-    "annual_fee": 30993,
-    "average_package": 1277250,
-    "highest_package": 3792173,
-    "placement_percentage": 75.8,
-    "student_rating": 4.4,
-    "website": "https://www.example.edu/21",
-    "logo": ""
-  },
-  {
-    "id": 22,
-    "college_name": "Government Law College",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 76,
-    "annual_fee": 310935,
-    "average_package": 638561,
-    "highest_package": 3304224,
-    "placement_percentage": 56.0,
-    "student_rating": 4.4,
-    "website": "https://www.example.edu/22",
-    "logo": ""
-  },
-  {
-    "id": 23,
-    "college_name": "Institute of Chemical Technology",
-    "city": "Vasai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 188,
-    "annual_fee": 336881,
-    "average_package": 925139,
-    "highest_package": 4121728,
-    "placement_percentage": 92.1,
-    "student_rating": 4.7,
-    "website": "https://www.example.edu/23",
-    "logo": ""
-  },
-  {
-    "id": 24,
-    "college_name": "Sophia College for Women",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A+",
-    "nirf_rank": 206,
-    "annual_fee": 176807,
-    "average_package": 1354232,
-    "highest_package": 3236947,
-    "placement_percentage": 82.4,
-    "student_rating": 4.4,
-    "website": "https://www.example.edu/24",
-    "logo": ""
-  },
-  {
-    "id": 25,
-    "college_name": "Bhavans Hazarimal Somani College",
-    "city": "Mumbai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 242,
-    "annual_fee": 331391,
-    "average_package": 1333438,
-    "highest_package": 3324775,
-    "placement_percentage": 86.4,
-    "student_rating": 3.8,
-    "website": "https://www.example.edu/25",
-    "logo": ""
-  },
-  {
-    "id": 26,
-    "college_name": "K C College",
-    "city": "Dombivli",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 113,
-    "annual_fee": 240502,
-    "average_package": 1237904,
-    "highest_package": 3203895,
-    "placement_percentage": 96.1,
-    "student_rating": 3.5,
-    "website": "https://www.example.edu/26",
-    "logo": ""
-  },
-  {
-    "id": 27,
-    "college_name": "Chetana's Hazarimal Somani College",
-    "city": "Mumbai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 177,
-    "annual_fee": 237071,
-    "average_package": 728602,
-    "highest_package": 3252996,
-    "placement_percentage": 81.8,
+    "nirf_rank": null,
+    "annual_fee": 33000,
+    "average_package": 500000,
+    "highest_package": 1150000,
+    "placement_percentage": 76.0,
     "student_rating": 4.5,
-    "website": "https://www.example.edu/27",
-    "logo": ""
+    "website": "https://patkarvardecollege.edu.in",
+    "source_url": "https://patkarvardecollege.edu.in",
+    "courses": [
+      {
+        "course_name": "B.Sc. Aviation",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 60000,
+        "specialization": "Aviation Management"
+      },
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 38000,
+        "specialization": "AI Foundations"
+      },
+      {
+        "course_name": "B.Sc. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 40000,
+        "specialization": "Software Tech"
+      }
+    ]
   },
   {
-    "id": 28,
-    "college_name": "Lala Lajpatrai College of Commerce",
-    "city": "Kalyan",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 92,
-    "annual_fee": 36646,
-    "average_package": 551456,
-    "highest_package": 2681093,
-    "placement_percentage": 88.6,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/28",
-    "logo": ""
-  },
-  {
-    "id": 29,
-    "college_name": "M M K College of Commerce & Economics",
-    "city": "Navi Mumbai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B",
-    "nirf_rank": 82,
-    "annual_fee": 105481,
-    "average_package": 1130133,
-    "highest_package": 3572769,
-    "placement_percentage": 72.3,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/29",
-    "logo": ""
-  },
-  {
-    "id": 30,
     "college_name": "Nagindas Khandwala College",
-    "city": "Ulhasnagar",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "B",
-    "nirf_rank": 180,
-    "annual_fee": 19952,
-    "average_package": 1275917,
-    "highest_package": 4526785,
-    "placement_percentage": 61.3,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/30",
-    "logo": ""
-  },
-  {
-    "id": 31,
-    "college_name": "Rizvi Institute of Management Studies",
-    "city": "Thane",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 100,
-    "annual_fee": 71218,
-    "average_package": 329869,
-    "highest_package": 3554802,
-    "placement_percentage": 59.4,
-    "student_rating": 4.6,
-    "website": "https://www.example.edu/31",
-    "logo": ""
-  },
-  {
-    "id": 32,
-    "college_name": "Rustomjee Business School",
-    "city": "Dombivli",
-    "type": "Private",
+    "city": "Mumbai",
+    "locality": "Malad",
+    "type": "Aided",
     "university": "University of Mumbai",
     "naac_grade": "A",
-    "nirf_rank": 279,
-    "annual_fee": 192033,
-    "average_package": 746231,
-    "highest_package": 2475022,
-    "placement_percentage": 76.5,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/32",
-    "logo": ""
+    "nirf_rank": null,
+    "annual_fee": 36000,
+    "average_package": 520000,
+    "highest_package": 1200000,
+    "placement_percentage": 78.0,
+    "student_rating": 4.6,
+    "website": "https://nkc.ac.in",
+    "source_url": "https://nkc.ac.in",
+    "courses": [
+      {
+        "course_name": "B.Sc. Computer Science",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 39000,
+        "specialization": "Artificial Intelligence"
+      },
+      {
+        "course_name": "B.Com Accounting & Finance",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 37000,
+        "specialization": "Forensic Accounting"
+      },
+      {
+        "course_name": "BMS Management Studies",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 42000,
+        "specialization": "E-Commerce & Digital"
+      }
+    ]
   },
   {
-    "id": 33,
-    "college_name": "Thakur Institute of Management Studies",
-    "city": "Bhiwandi",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 257,
-    "annual_fee": 44819,
-    "average_package": 1041938,
-    "highest_package": 3463604,
-    "placement_percentage": 83.5,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/33",
-    "logo": ""
-  },
-  {
-    "id": 34,
-    "college_name": "Jamnalal Bajaj Institute of Management Studies",
+    "college_name": "Sardar Patel Institute of Technology (SPIT)",
     "city": "Mumbai",
-    "type": "Private",
+    "locality": "Andheri West",
+    "type": "Unaided",
     "university": "University of Mumbai",
     "naac_grade": "A+",
-    "nirf_rank": 89,
-    "annual_fee": 327673,
-    "average_package": 339226,
-    "highest_package": 2685243,
-    "placement_percentage": 88.4,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/34",
-    "logo": ""
+    "nirf_rank": 125,
+    "annual_fee": 172000,
+    "average_package": 1500000,
+    "highest_package": 4200000,
+    "placement_percentage": 94.5,
+    "student_rating": 4.8,
+    "website": "https://www.spit.ac.in",
+    "source_url": "https://www.spit.ac.in",
+    "courses": [
+      {
+        "course_name": "B.Tech Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 172000,
+        "specialization": "Cloud Computing & AI"
+      },
+      {
+        "course_name": "B.Tech Computer Science & Engineering (Data Science)",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 172000,
+        "specialization": "Big Data & Machine Learning"
+      },
+      {
+        "course_name": "B.Tech Electronics & Telecommunication Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 172000,
+        "specialization": "VLSI & Signal Processing"
+      },
+      {
+        "course_name": "Master of Computer Applications (MCA)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 125000,
+        "specialization": "Enterprise Software"
+      }
+    ]
   },
   {
-    "id": 35,
-    "college_name": "Welingkar Institute of Management",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 248,
-    "annual_fee": 123091,
-    "average_package": 429510,
-    "highest_package": 2296778,
-    "placement_percentage": 84.3,
-    "student_rating": 4.5,
-    "website": "https://www.example.edu/35",
-    "logo": ""
-  },
-  {
-    "id": 36,
-    "college_name": "S P Jain Institute of Management",
+    "college_name": "Veermata Jijabai Technological Institute (VJTI)",
     "city": "Mumbai",
+    "locality": "Matunga",
     "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 260,
-    "annual_fee": 33359,
-    "average_package": 419165,
-    "highest_package": 1961425,
-    "placement_percentage": 63.2,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/36",
-    "logo": ""
-  },
-  {
-    "id": 37,
-    "college_name": "Somaiya Institute of Management",
-    "city": "Bhiwandi",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 263,
-    "annual_fee": 44294,
-    "average_package": 432894,
-    "highest_package": 2792012,
-    "placement_percentage": 69.0,
-    "student_rating": 3.7,
-    "website": "https://www.example.edu/37",
-    "logo": ""
-  },
-  {
-    "id": 38,
-    "college_name": "N L Dalmia Institute of Management",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 287,
-    "annual_fee": 326420,
-    "average_package": 1302514,
-    "highest_package": 3932179,
-    "placement_percentage": 95.5,
-    "student_rating": 4.6,
-    "website": "https://www.example.edu/38",
-    "logo": ""
-  },
-  {
-    "id": 39,
-    "college_name": "Chetana's Institute of Management",
-    "city": "Ulhasnagar",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 38,
-    "annual_fee": 294633,
-    "average_package": 587591,
-    "highest_package": 2835093,
-    "placement_percentage": 60.2,
-    "student_rating": 4.3,
-    "website": "https://www.example.edu/39",
-    "logo": ""
-  },
-  {
-    "id": 40,
-    "college_name": "SIES College of Management Studies",
-    "city": "Thane",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B",
-    "nirf_rank": 188,
-    "annual_fee": 171510,
-    "average_package": 934975,
-    "highest_package": 1948147,
-    "placement_percentage": 93.6,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/40",
-    "logo": ""
-  },
-  {
-    "id": 41,
-    "college_name": "D J Sanghvi College of Engineering",
-    "city": "Ulhasnagar",
-    "type": "Private",
     "university": "University of Mumbai",
     "naac_grade": "A+",
-    "nirf_rank": 115,
-    "annual_fee": 305228,
-    "average_package": 760509,
-    "highest_package": 1655299,
-    "placement_percentage": 72.1,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/41",
-    "logo": ""
+    "nirf_rank": 82,
+    "annual_fee": 85000,
+    "average_package": 1420000,
+    "highest_package": 4400000,
+    "placement_percentage": 95.2,
+    "student_rating": 4.8,
+    "website": "https://vjti.ac.in",
+    "source_url": "https://vjti.ac.in",
+    "courses": [
+      {
+        "course_name": "B.Tech Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 85000,
+        "specialization": "High Performance Computing"
+      },
+      {
+        "course_name": "B.Tech Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 85000,
+        "specialization": "Network Architecture"
+      },
+      {
+        "course_name": "B.Tech Mechanical Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 85000,
+        "specialization": "Thermodynamics & CAD"
+      },
+      {
+        "course_name": "M.Tech Software Engineering",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 95000,
+        "specialization": "Distributed Systems"
+      }
+    ]
   },
   {
-    "id": 42,
-    "college_name": "K J Somaiya College of Engineering",
-    "city": "Dombivli",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 48,
-    "annual_fee": 330325,
-    "average_package": 1146850,
-    "highest_package": 3069206,
-    "placement_percentage": 73.1,
-    "student_rating": 4.4,
-    "website": "https://www.example.edu/42",
-    "logo": ""
-  },
-  {
-    "id": 43,
-    "college_name": "Thadomal Shahani Engineering College",
-    "city": "Panvel",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 265,
-    "annual_fee": 33155,
-    "average_package": 1261902,
-    "highest_package": 3609317,
-    "placement_percentage": 85.2,
-    "student_rating": 4.3,
-    "website": "https://www.example.edu/43",
-    "logo": ""
-  },
-  {
-    "id": 44,
-    "college_name": "Vivekanand Education Society's Institute of Technology",
-    "city": "Navi Mumbai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 136,
-    "annual_fee": 93706,
-    "average_package": 536663,
-    "highest_package": 1995287,
-    "placement_percentage": 96.8,
-    "student_rating": 3.8,
-    "website": "https://www.example.edu/44",
-    "logo": ""
-  },
-  {
-    "id": 45,
-    "college_name": "Sardar Patel Institute of Technology",
-    "city": "Vasai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 77,
-    "annual_fee": 155185,
-    "average_package": 867166,
-    "highest_package": 1910561,
-    "placement_percentage": 90.3,
-    "student_rating": 4.2,
-    "website": "https://www.example.edu/45",
-    "logo": ""
-  },
-  {
-    "id": 46,
-    "college_name": "Fr. Conceicao Rodrigues College of Engineering",
-    "city": "Thane",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 38,
-    "annual_fee": 319319,
-    "average_package": 985870,
-    "highest_package": 1861101,
-    "placement_percentage": 67.0,
-    "student_rating": 3.8,
-    "website": "https://www.example.edu/46",
-    "logo": ""
-  },
-  {
-    "id": 47,
-    "college_name": "Xavier Institute of Engineering",
-    "city": "Kalyan",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 136,
-    "annual_fee": 17902,
-    "average_package": 846416,
-    "highest_package": 1697657,
-    "placement_percentage": 81.2,
-    "student_rating": 4.6,
-    "website": "https://www.example.edu/47",
-    "logo": ""
-  },
-  {
-    "id": 48,
-    "college_name": "Rizvi College of Engineering",
+    "college_name": "Dwarkadas J. Sanghvi College of Engineering (DJSCE)",
     "city": "Mumbai",
-    "type": "Private",
+    "locality": "Vile Parle",
+    "type": "Unaided",
     "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 123,
-    "annual_fee": 237813,
-    "average_package": 1176106,
-    "highest_package": 2799591,
-    "placement_percentage": 81.7,
+    "naac_grade": "A+",
+    "nirf_rank": 140,
+    "annual_fee": 195000,
+    "average_package": 1120000,
+    "highest_package": 3600000,
+    "placement_percentage": 91.0,
     "student_rating": 4.7,
-    "website": "https://www.example.edu/48",
-    "logo": ""
+    "website": "https://www.djsce.ac.in",
+    "source_url": "https://www.djsce.ac.in",
+    "courses": [
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 195000,
+        "specialization": "Data Structures & Systems"
+      },
+      {
+        "course_name": "B.E. Artificial Intelligence and Machine Learning",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 195000,
+        "specialization": "Deep Learning Models"
+      },
+      {
+        "course_name": "B.E. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 195000,
+        "specialization": "Cybersecurity & DevOps"
+      }
+    ]
   },
   {
-    "id": 49,
-    "college_name": "Thakur College of Engineering & Technology",
-    "city": "Vasai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B",
-    "nirf_rank": 157,
-    "annual_fee": 197308,
-    "average_package": 405653,
-    "highest_package": 1665434,
-    "placement_percentage": 63.7,
-    "student_rating": 4.1,
-    "website": "https://www.example.edu/49",
-    "logo": ""
-  },
-  {
-    "id": 50,
-    "college_name": "Atharva College of Engineering",
-    "city": "Dombivli",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 129,
-    "annual_fee": 293668,
-    "average_package": 1348761,
-    "highest_package": 4667992,
-    "placement_percentage": 62.6,
-    "student_rating": 3.5,
-    "website": "https://www.example.edu/50",
-    "logo": ""
-  },
-  {
-    "id": 51,
-    "college_name": "Bharati Vidyapeeth College of Engineering",
-    "city": "Ulhasnagar",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 222,
-    "annual_fee": 31569,
-    "average_package": 697319,
-    "highest_package": 3354176,
-    "placement_percentage": 75.4,
-    "student_rating": 4.3,
-    "website": "https://www.example.edu/51",
-    "logo": ""
-  },
-  {
-    "id": 52,
-    "college_name": "Datta Meghe College of Engineering",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
+    "college_name": "K. J. Somaiya College of Engineering (KJSCE)",
+    "city": "Mumbai",
+    "locality": "Vidyavihar",
+    "type": "Unaided",
+    "university": "Somaiya Vidyavihar University",
     "naac_grade": "A",
-    "nirf_rank": 102,
-    "annual_fee": 266090,
-    "average_package": 1362597,
-    "highest_package": 3153532,
-    "placement_percentage": 84.6,
+    "nirf_rank": 160,
+    "annual_fee": 375000,
+    "average_package": 980000,
+    "highest_package": 3200000,
+    "placement_percentage": 88.5,
     "student_rating": 4.6,
-    "website": "https://www.example.edu/52",
-    "logo": ""
+    "website": "https://kjsce.somaiya.edu",
+    "source_url": "https://kjsce.somaiya.edu",
+    "courses": [
+      {
+        "course_name": "B.Tech Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 375000,
+        "specialization": "AI & Cloud"
+      },
+      {
+        "course_name": "B.Tech Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 375000,
+        "specialization": "Full-Stack Dev"
+      },
+      {
+        "course_name": "B.Tech Electronics & Telecommunication",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 375000,
+        "specialization": "Wireless IoT"
+      }
+    ]
   },
   {
-    "id": 53,
-    "college_name": "Lokmanya Tilak College of Engineering",
-    "city": "Thane",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 37,
-    "annual_fee": 133252,
-    "average_package": 1148712,
-    "highest_package": 3106451,
-    "placement_percentage": 97.2,
-    "student_rating": 4.3,
-    "website": "https://www.example.edu/53",
-    "logo": ""
-  },
-  {
-    "id": 54,
-    "college_name": "Pillai College of Engineering",
-    "city": "Panvel",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 145,
-    "annual_fee": 285832,
-    "average_package": 642352,
-    "highest_package": 1374721,
-    "placement_percentage": 58.6,
-    "student_rating": 4.2,
-    "website": "https://www.example.edu/54",
-    "logo": ""
-  },
-  {
-    "id": 55,
-    "college_name": "Ramrao Adik Institute of Technology",
-    "city": "Ulhasnagar",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 135,
-    "annual_fee": 83717,
-    "average_package": 1263542,
-    "highest_package": 2540964,
-    "placement_percentage": 61.8,
-    "student_rating": 3.9,
-    "website": "https://www.example.edu/55",
-    "logo": ""
-  },
-  {
-    "id": 56,
-    "college_name": "Shah & Anchor Kutchhi Engineering College",
-    "city": "Vasai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A+",
-    "nirf_rank": 183,
-    "annual_fee": 346824,
-    "average_package": 978499,
-    "highest_package": 2503781,
-    "placement_percentage": 56.5,
-    "student_rating": 3.7,
-    "website": "https://www.example.edu/56",
-    "logo": ""
-  },
-  {
-    "id": 57,
-    "college_name": "Terna Engineering College",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A+",
-    "nirf_rank": 259,
-    "annual_fee": 103982,
-    "average_package": 1295399,
-    "highest_package": 2965311,
-    "placement_percentage": 76.6,
-    "student_rating": 4.5,
-    "website": "https://www.example.edu/57",
-    "logo": ""
-  },
-  {
-    "id": 58,
-    "college_name": "Vidyalankar Institute of Technology",
+    "college_name": "Thadomal Shahani Engineering College (TSEC)",
     "city": "Mumbai",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "B++",
-    "nirf_rank": 12,
-    "annual_fee": 41772,
-    "average_package": 488226,
-    "highest_package": 1591640,
-    "placement_percentage": 72.2,
-    "student_rating": 3.8,
-    "website": "https://www.example.edu/58",
-    "logo": ""
-  },
-  {
-    "id": 59,
-    "college_name": "Watumull Institute of Engineering",
-    "city": "Panvel",
-    "type": "Private",
+    "locality": "Bandra West",
+    "type": "Unaided",
     "university": "University of Mumbai",
     "naac_grade": "A",
-    "nirf_rank": 254,
-    "annual_fee": 104293,
-    "average_package": 625587,
-    "highest_package": 3883525,
-    "placement_percentage": 93.4,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/59",
-    "logo": ""
+    "nirf_rank": null,
+    "annual_fee": 185000,
+    "average_package": 950000,
+    "highest_package": 3000000,
+    "placement_percentage": 87.0,
+    "student_rating": 4.5,
+    "website": "https://tsec.edu",
+    "source_url": "https://tsec.edu",
+    "courses": [
+      {
+        "course_name": "B.E. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 185000,
+        "specialization": "Software Tech"
+      },
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 185000,
+        "specialization": "AI & Data"
+      },
+      {
+        "course_name": "B.E. Chemical Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 185000,
+        "specialization": "Process Design"
+      }
+    ]
   },
   {
-    "id": 60,
-    "college_name": "M H Saboo Siddik College of Engineering",
-    "city": "Panvel",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B",
-    "nirf_rank": 259,
-    "annual_fee": 135891,
-    "average_package": 391830,
-    "highest_package": 3890803,
-    "placement_percentage": 93.4,
-    "student_rating": 3.6,
-    "website": "https://www.example.edu/60",
-    "logo": ""
-  },
-  {
-    "id": 61,
-    "college_name": "Anjuman-I-Islam's Kalsekar Technical Campus",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 16,
-    "annual_fee": 324435,
-    "average_package": 333721,
-    "highest_package": 3712992,
-    "placement_percentage": 80.1,
-    "student_rating": 3.5,
-    "website": "https://www.example.edu/61",
-    "logo": ""
-  },
-  {
-    "id": 62,
-    "college_name": "St. Francis Institute of Technology",
+    "college_name": "Vivekanand Education Society's Institute of Technology (VESIT)",
     "city": "Mumbai",
-    "type": "Private",
+    "locality": "Chembur",
+    "type": "Unaided",
     "university": "University of Mumbai",
-    "naac_grade": "B",
-    "nirf_rank": 273,
-    "annual_fee": 115006,
-    "average_package": 1089825,
-    "highest_package": 3483075,
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 140000,
+    "average_package": 780000,
+    "highest_package": 2400000,
+    "placement_percentage": 86.0,
+    "student_rating": 4.5,
+    "website": "https://vesit.ves.ac.in",
+    "source_url": "https://vesit.ves.ac.in",
+    "courses": [
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 140000,
+        "specialization": "Embedded Systems"
+      },
+      {
+        "course_name": "B.E. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 140000,
+        "specialization": "Cybersecurity"
+      },
+      {
+        "course_name": "MCA",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 110000,
+        "specialization": "Web Engineering"
+      }
+    ]
+  },
+  {
+    "college_name": "Fr. Conceicao Rodrigues College of Engineering (CRCE)",
+    "city": "Mumbai",
+    "locality": "Bandra",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A+",
+    "nirf_rank": null,
+    "annual_fee": 160000,
+    "average_package": 820000,
+    "highest_package": 2600000,
+    "placement_percentage": 85.0,
+    "student_rating": 4.5,
+    "website": "https://www.frcrce.ac.in",
+    "source_url": "https://www.frcrce.ac.in",
+    "courses": [
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 160000,
+        "specialization": "Software Engineering"
+      },
+      {
+        "course_name": "B.E. Artificial Intelligence & Data Science",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 160000,
+        "specialization": "Machine Learning"
+      },
+      {
+        "course_name": "B.E. Mechanical Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 160000,
+        "specialization": "Automation"
+      }
+    ]
+  },
+  {
+    "college_name": "Vidyalankar Institute of Technology (VIT Mumbai)",
+    "city": "Mumbai",
+    "locality": "Wadala",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A+",
+    "nirf_rank": null,
+    "annual_fee": 155000,
+    "average_package": 720000,
+    "highest_package": 2200000,
+    "placement_percentage": 83.5,
+    "student_rating": 4.5,
+    "website": "https://vit.edu.in",
+    "source_url": "https://vit.edu.in",
+    "courses": [
+      {
+        "course_name": "B.Tech Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 155000,
+        "specialization": "Cloud & Security"
+      },
+      {
+        "course_name": "B.Tech Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 155000,
+        "specialization": "AI & Systems"
+      },
+      {
+        "course_name": "Master of Management Studies (MMS)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 165000,
+        "specialization": "Management"
+      }
+    ]
+  },
+  {
+    "college_name": "Thakur College of Engineering & Technology (TCET)",
+    "city": "Mumbai",
+    "locality": "Kandivali",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": 175,
+    "annual_fee": 165000,
+    "average_package": 700000,
+    "highest_package": 2100000,
+    "placement_percentage": 82.0,
+    "student_rating": 4.4,
+    "website": "https://www.tcetmumbai.in",
+    "source_url": "https://www.tcetmumbai.in",
+    "courses": [
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 165000,
+        "specialization": "Cloud Tech"
+      },
+      {
+        "course_name": "B.E. Artificial Intelligence and Data Science",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 165000,
+        "specialization": "Deep Learning"
+      },
+      {
+        "course_name": "B.E. Cyber Security",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 165000,
+        "specialization": "Ethical Hacking"
+      }
+    ]
+  },
+  {
+    "college_name": "St. Francis Institute of Technology (SFIT)",
+    "city": "Mumbai",
+    "locality": "Borivali",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 145000,
+    "average_package": 680000,
+    "highest_package": 1900000,
+    "placement_percentage": 80.0,
+    "student_rating": 4.4,
+    "website": "https://www.sfit.ac.in",
+    "source_url": "https://www.sfit.ac.in",
+    "courses": [
+      {
+        "course_name": "B.E. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 145000,
+        "specialization": "Web Tech"
+      },
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 145000,
+        "specialization": "AI"
+      },
+      {
+        "course_name": "B.E. Electronics & Telecom",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 145000,
+        "specialization": "Telecommunication"
+      }
+    ]
+  },
+  {
+    "college_name": "Don Bosco Institute of Technology (DBIT)",
+    "city": "Mumbai",
+    "locality": "Kurla",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 135000,
+    "average_package": 650000,
+    "highest_package": 1800000,
     "placement_percentage": 79.0,
     "student_rating": 4.4,
-    "website": "https://www.example.edu/62",
-    "logo": ""
+    "website": "https://www.dbit.in",
+    "source_url": "https://www.dbit.in",
+    "courses": [
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 135000,
+        "specialization": "Software Tech"
+      },
+      {
+        "course_name": "B.E. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 135000,
+        "specialization": "Full Stack Dev"
+      },
+      {
+        "course_name": "B.E. Mechanical Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 135000,
+        "specialization": "CAD/CAM"
+      }
+    ]
   },
   {
-    "id": 63,
-    "college_name": "Universal College of Engineering",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 48,
-    "annual_fee": 61737,
-    "average_package": 1258290,
-    "highest_package": 2052359,
-    "placement_percentage": 87.2,
-    "student_rating": 4.3,
-    "website": "https://www.example.edu/63",
-    "logo": ""
-  },
-  {
-    "id": 64,
-    "college_name": "Bharati Vidyapeeth Institute of Management",
-    "city": "Vasai",
-    "type": "Government",
-    "university": "University of Mumbai",
-    "naac_grade": "A+",
-    "nirf_rank": 106,
-    "annual_fee": 39143,
-    "average_package": 1293753,
-    "highest_package": 2851529,
-    "placement_percentage": 89.8,
-    "student_rating": 3.7,
-    "website": "https://www.example.edu/64",
-    "logo": ""
-  },
-  {
-    "id": 65,
-    "college_name": "Sinhgad Institute of Business Administration",
-    "city": "Vasai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 102,
-    "annual_fee": 301350,
-    "average_package": 1335885,
-    "highest_package": 3440459,
-    "placement_percentage": 58.3,
-    "student_rating": 3.5,
-    "website": "https://www.example.edu/65",
-    "logo": ""
-  },
-  {
-    "id": 66,
-    "college_name": "Tolani Maritime Institute",
+    "college_name": "M. H. Saboo Siddik College of Engineering",
     "city": "Mumbai",
-    "type": "Government",
+    "locality": "Byculla",
+    "type": "Aided",
     "university": "University of Mumbai",
     "naac_grade": "B++",
-    "nirf_rank": 32,
-    "annual_fee": 23321,
-    "average_package": 938409,
-    "highest_package": 4043704,
-    "placement_percentage": 79.4,
-    "student_rating": 4.1,
-    "website": "https://www.example.edu/66",
-    "logo": ""
+    "nirf_rank": null,
+    "annual_fee": 125000,
+    "average_package": 580000,
+    "highest_package": 1500000,
+    "placement_percentage": 76.0,
+    "student_rating": 4.3,
+    "website": "https://www.mhssce.ac.in",
+    "source_url": "https://www.mhssce.ac.in",
+    "courses": [
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 125000,
+        "specialization": "Algorithms & Systems"
+      },
+      {
+        "course_name": "B.E. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 125000,
+        "specialization": "Network Engineering"
+      },
+      {
+        "course_name": "B.E. Automobile Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 125000,
+        "specialization": "Automotive Design"
+      }
+    ]
   },
   {
-    "id": 67,
-    "college_name": "Sies Graduate School of Technology",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 238,
-    "annual_fee": 112176,
-    "average_package": 756536,
-    "highest_package": 4090659,
-    "placement_percentage": 76.1,
-    "student_rating": 4.1,
-    "website": "https://www.example.edu/67",
-    "logo": ""
-  },
-  {
-    "id": 68,
-    "college_name": "Fr. Agnel College",
-    "city": "Ulhasnagar",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 149,
-    "annual_fee": 347874,
-    "average_package": 717857,
-    "highest_package": 2525115,
-    "placement_percentage": 97.1,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/68",
-    "logo": ""
-  },
-  {
-    "id": 69,
-    "college_name": "Don Bosco Institute of Technology",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 298,
-    "annual_fee": 295641,
-    "average_package": 863415,
-    "highest_package": 2985974,
-    "placement_percentage": 64.0,
-    "student_rating": 3.5,
-    "website": "https://www.example.edu/69",
-    "logo": ""
-  },
-  {
-    "id": 70,
-    "college_name": "Vartak College Vasai",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 58,
-    "annual_fee": 197263,
-    "average_package": 1054038,
-    "highest_package": 2110223,
-    "placement_percentage": 80.9,
-    "student_rating": 4.4,
-    "website": "https://www.example.edu/70",
-    "logo": ""
-  },
-  {
-    "id": 71,
-    "college_name": "B N N College Bhiwandi",
-    "city": "Ulhasnagar",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B",
-    "nirf_rank": 231,
-    "annual_fee": 314877,
-    "average_package": 1126446,
-    "highest_package": 1730609,
-    "placement_percentage": 61.8,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/71",
-    "logo": ""
-  },
-  {
-    "id": 72,
-    "college_name": "Model College Dombivli",
-    "city": "Dombivli",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 167,
-    "annual_fee": 278198,
-    "average_package": 1021336,
-    "highest_package": 3098839,
-    "placement_percentage": 68.6,
-    "student_rating": 4.5,
-    "website": "https://www.example.edu/72",
-    "logo": ""
-  },
-  {
-    "id": 73,
-    "college_name": "Birla College of Arts, Science & Commerce",
-    "city": "Vasai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A",
-    "nirf_rank": 191,
-    "annual_fee": 122936,
-    "average_package": 710498,
-    "highest_package": 4201135,
-    "placement_percentage": 55.5,
-    "student_rating": 3.5,
-    "website": "https://www.example.edu/73",
-    "logo": ""
-  },
-  {
-    "id": 74,
-    "college_name": "Joshi-Bedekar College",
+    "college_name": "Xavier Institute of Engineering (XIE)",
     "city": "Mumbai",
-    "type": "Private",
+    "locality": "Mahim",
+    "type": "Unaided",
     "university": "University of Mumbai",
     "naac_grade": "A",
-    "nirf_rank": 53,
-    "annual_fee": 100055,
-    "average_package": 1056462,
-    "highest_package": 3351845,
-    "placement_percentage": 87.5,
-    "student_rating": 3.5,
-    "website": "https://www.example.edu/74",
-    "logo": ""
+    "nirf_rank": null,
+    "annual_fee": 138000,
+    "average_package": 620000,
+    "highest_package": 1700000,
+    "placement_percentage": 78.0,
+    "student_rating": 4.4,
+    "website": "https://www.xavier.ac.in",
+    "source_url": "https://www.xavier.ac.in",
+    "courses": [
+      {
+        "course_name": "B.E. Computer Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 138000,
+        "specialization": "AI & Big Data"
+      },
+      {
+        "course_name": "B.E. Information Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 138000,
+        "specialization": "Cybersecurity"
+      },
+      {
+        "course_name": "B.E. Electronics and Telecom",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 138000,
+        "specialization": "VLSI & Embedded"
+      }
+    ]
   },
   {
-    "id": 75,
-    "college_name": "B K Birla College of Arts, Science & Commerce",
-    "city": "Dombivli",
-    "type": "Private",
+    "college_name": "Jamnalal Bajaj Institute of Management Studies (JBIMS)",
+    "city": "Mumbai",
+    "locality": "Churchgate",
+    "type": "Government",
     "university": "University of Mumbai",
     "naac_grade": "A+",
-    "nirf_rank": 192,
-    "annual_fee": 138074,
-    "average_package": 822871,
-    "highest_package": 2437415,
-    "placement_percentage": 73.8,
+    "nirf_rank": 25,
+    "annual_fee": 300000,
+    "average_package": 2750000,
+    "highest_package": 4500000,
+    "placement_percentage": 99.0,
+    "student_rating": 4.9,
+    "website": "https://jbims.edu",
+    "source_url": "https://jbims.edu",
+    "courses": [
+      {
+        "course_name": "Master of Management Studies (MMS)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 300000,
+        "specialization": "Finance, Marketing, Operations & HR"
+      },
+      {
+        "course_name": "M.Sc. Finance",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 350000,
+        "specialization": "Investment Banking & Risk"
+      },
+      {
+        "course_name": "Master of Human Resource Development (MHRD)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 300000,
+        "specialization": "Organizational Leadership"
+      }
+    ]
+  },
+  {
+    "college_name": "S. P. Jain Institute of Management and Research (SPJIMR)",
+    "city": "Mumbai",
+    "locality": "Andheri West",
+    "type": "Unaided",
+    "university": "Autonomous",
+    "naac_grade": "A++",
+    "nirf_rank": 20,
+    "annual_fee": 1050000,
+    "average_package": 3300000,
+    "highest_package": 7700000,
+    "placement_percentage": 100.0,
+    "student_rating": 4.9,
+    "website": "https://www.spjimr.org",
+    "source_url": "https://www.spjimr.org",
+    "courses": [
+      {
+        "course_name": "Post Graduate Diploma in Management (PGDM)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 1050000,
+        "specialization": "Finance, Marketing, Information Management, Operations"
+      },
+      {
+        "course_name": "Post Graduate Programme in Management (PGPM)",
+        "degree_level": "Postgraduate",
+        "duration": "18 Months",
+        "annual_fee": 1150000,
+        "specialization": "Executive Business Leadership"
+      },
+      {
+        "course_name": "Global Management Programme (GMP)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 950000,
+        "specialization": "International Business"
+      }
+    ]
+  },
+  {
+    "college_name": "Prin. L. N. Welingkar Institute of Management Development & Research (WeSchool)",
+    "city": "Mumbai",
+    "locality": "Matunga",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": 73,
+    "annual_fee": 650000,
+    "average_package": 1250000,
+    "highest_package": 2550000,
+    "placement_percentage": 92.0,
+    "student_rating": 4.6,
+    "website": "https://www.welingkar.org",
+    "source_url": "https://www.welingkar.org",
+    "courses": [
+      {
+        "course_name": "Post Graduate Diploma in Management (PGDM)",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 650000,
+        "specialization": "Business Design & Innovation"
+      },
+      {
+        "course_name": "PGDM E-Business",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 650000,
+        "specialization": "Digital Transformation & Ecommerce"
+      },
+      {
+        "course_name": "PGDM Healthcare Management",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 650000,
+        "specialization": "Hospital Operations"
+      }
+    ]
+  },
+  {
+    "college_name": "N. L. Dalmia Institute of Management Studies and Research",
+    "city": "Mumbai",
+    "locality": "Mira Road",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A+",
+    "nirf_rank": null,
+    "annual_fee": 540000,
+    "average_package": 1020000,
+    "highest_package": 2500000,
+    "placement_percentage": 90.0,
+    "student_rating": 4.6,
+    "website": "https://www.nldalmia.in",
+    "source_url": "https://www.nldalmia.in",
+    "courses": [
+      {
+        "course_name": "PGDM Finance",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 540000,
+        "specialization": "Bloomberg Lab & Financial Analytics"
+      },
+      {
+        "course_name": "PGDM Business Analytics",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 540000,
+        "specialization": "Data-Driven Strategy"
+      },
+      {
+        "course_name": "MMS Management Studies",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 260000,
+        "specialization": "Corporate Finance & Marketing"
+      }
+    ]
+  },
+  {
+    "college_name": "Chetana's Institute of Management and Research (CIMR)",
+    "city": "Mumbai",
+    "locality": "Bandra East",
+    "type": "Unaided",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 420000,
+    "average_package": 880000,
+    "highest_package": 1800000,
+    "placement_percentage": 88.0,
     "student_rating": 4.5,
-    "website": "https://www.example.edu/75",
-    "logo": ""
+    "website": "https://www.cimr.in",
+    "source_url": "https://www.cimr.in",
+    "courses": [
+      {
+        "course_name": "PGDM Marketing",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 420000,
+        "specialization": "Brand Management & Digital Sales"
+      },
+      {
+        "course_name": "PGDM Retail Management",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 420000,
+        "specialization": "Omnichannel Retail"
+      },
+      {
+        "course_name": "MMS",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 240000,
+        "specialization": "General Management"
+      }
+    ]
   },
   {
-    "id": 76,
-    "college_name": "V K Krishna Menon College",
+    "college_name": "SIES College of Management Studies (SIESCOMS)",
     "city": "Navi Mumbai",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A++",
-    "nirf_rank": 211,
-    "annual_fee": 75210,
-    "average_package": 1138948,
-    "highest_package": 3963234,
-    "placement_percentage": 78.6,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/76",
-    "logo": ""
-  },
-  {
-    "id": 77,
-    "college_name": "Pendharkar College",
-    "city": "Bhiwandi",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "A+",
-    "nirf_rank": 88,
-    "annual_fee": 210055,
-    "average_package": 1318324,
-    "highest_package": 2023748,
-    "placement_percentage": 94.2,
-    "student_rating": 4.1,
-    "website": "https://www.example.edu/77",
-    "logo": ""
-  },
-  {
-    "id": 78,
-    "college_name": "Changu Kana Thakur College",
-    "city": "Kalyan",
-    "type": "Private",
+    "locality": "Nerul",
+    "type": "Unaided",
     "university": "University of Mumbai",
     "naac_grade": "A",
-    "nirf_rank": 248,
-    "annual_fee": 216118,
-    "average_package": 836331,
-    "highest_package": 4074447,
-    "placement_percentage": 66.2,
-    "student_rating": 4.2,
-    "website": "https://www.example.edu/78",
-    "logo": ""
+    "nirf_rank": null,
+    "annual_fee": 450000,
+    "average_package": 910000,
+    "highest_package": 2000000,
+    "placement_percentage": 89.0,
+    "student_rating": 4.5,
+    "website": "https://siescoms.edu",
+    "source_url": "https://siescoms.edu",
+    "courses": [
+      {
+        "course_name": "PGDM Pharma & Healthcare Management",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 450000,
+        "specialization": "Pharmaceutical Marketing"
+      },
+      {
+        "course_name": "PGDM Biotechnology",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 450000,
+        "specialization": "Bio-Business Management"
+      },
+      {
+        "course_name": "MMS Management Studies",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 250000,
+        "specialization": "Finance & HR"
+      }
+    ]
   },
   {
-    "id": 79,
-    "college_name": "Karmaveer Bhaurao Patil College",
-    "city": "Ulhasnagar",
-    "type": "Private",
-    "university": "University of Mumbai",
-    "naac_grade": "B+",
-    "nirf_rank": 113,
-    "annual_fee": 147730,
-    "average_package": 639019,
-    "highest_package": 1454307,
-    "placement_percentage": 63.9,
-    "student_rating": 4.0,
-    "website": "https://www.example.edu/79",
-    "logo": ""
-  },
-  {
-    "id": 80,
-    "college_name": "Smt. CHM College Ulhasnagar",
-    "city": "Kalyan",
-    "type": "Private",
-    "university": "University of Mumbai",
+    "college_name": "Institute of Chemical Technology (ICT Mumbai)",
+    "city": "Mumbai",
+    "locality": "Matunga",
+    "type": "Government",
+    "university": "Deemed University",
     "naac_grade": "A++",
-    "nirf_rank": 90,
-    "annual_fee": 295908,
-    "average_package": 1196371,
-    "highest_package": 2281879,
-    "placement_percentage": 78.6,
-    "student_rating": 3.9,
-    "website": "https://www.example.edu/80",
-    "logo": ""
+    "nirf_rank": 24,
+    "annual_fee": 90000,
+    "average_package": 1050000,
+    "highest_package": 2800000,
+    "placement_percentage": 91.0,
+    "student_rating": 4.9,
+    "website": "https://www.ictmumbai.edu.in",
+    "source_url": "https://www.ictmumbai.edu.in",
+    "courses": [
+      {
+        "course_name": "B.Chem.Eng. Chemical Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 90000,
+        "specialization": "Petrochemicals & Catalysis"
+      },
+      {
+        "course_name": "B.Tech Polymer and Surface Engineering",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 90000,
+        "specialization": "Advanced Materials"
+      },
+      {
+        "course_name": "B.Tech Food Engineering and Technology",
+        "degree_level": "Undergraduate",
+        "duration": "4 Years",
+        "annual_fee": 90000,
+        "specialization": "Nutraceuticals"
+      },
+      {
+        "course_name": "M.Chem.Eng. Chemical Engineering",
+        "degree_level": "Postgraduate",
+        "duration": "2 Years",
+        "annual_fee": 95000,
+        "specialization": "Reaction Engineering"
+      }
+    ]
+  },
+  {
+    "college_name": "Government Law College (GLC Mumbai)",
+    "city": "Mumbai",
+    "locality": "Churchgate",
+    "type": "Government",
+    "university": "University of Mumbai",
+    "naac_grade": "A",
+    "nirf_rank": null,
+    "annual_fee": 15000,
+    "average_package": 850000,
+    "highest_package": 2100000,
+    "placement_percentage": 89.0,
+    "student_rating": 4.8,
+    "website": "https://www.glcmumbai.com",
+    "source_url": "https://www.glcmumbai.com",
+    "courses": [
+      {
+        "course_name": "Bachelor of Laws (LL.B.) - 3 Years",
+        "degree_level": "Undergraduate",
+        "duration": "3 Years",
+        "annual_fee": 15000,
+        "specialization": "Constitutional & Corporate Law"
+      },
+      {
+        "course_name": "B.L.S. LL.B. (5-Year Integrated)",
+        "degree_level": "Undergraduate",
+        "duration": "5 Years",
+        "annual_fee": 18000,
+        "specialization": "Commercial Litigation"
+      },
+      {
+        "course_name": "Postgraduate Diploma in Cyber Law",
+        "degree_level": "Postgraduate Diploma",
+        "duration": "1 Year",
+        "annual_fee": 22000,
+        "specialization": "Cyber Crimes"
+      }
+    ]
   }
 ]

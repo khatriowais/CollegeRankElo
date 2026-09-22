@@ -24,19 +24,22 @@ from typing import List
 
 from database import SessionLocal, init_db, reset_db
 from models import College, EloHistory
-from providers import MumbaiProvider, HipolabsIndiaProvider, RawCollege
+from providers import (MumbaiProvider, HipolabsIndiaProvider,
+                       USScorecardProvider, RawCollege)
 
 try:
     from config import settings
     _DATA_FILE = settings.data_file
     _SNAPSHOTS = settings.snapshots_dir
     _START = settings.elo_start_rating
+    _SCORECARD_KEY = settings.scorecard_api_key
 except Exception:                     # pragma: no cover - config always present
     import os
     _BASE = os.path.dirname(os.path.abspath(__file__))
     _DATA_FILE = os.path.join(_BASE, "data", "mumbai_university_colleges.json")
     _SNAPSHOTS = os.path.join(_BASE, "data", "snapshots")
     _START = 1500.0
+    _SCORECARD_KEY = "DEMO_KEY"
 
 # Higher number wins a collision on the same (college_name, country).
 PRIORITY = {"mumbai_curated": 3, "us_scorecard": 2, "hipolabs": 1}
@@ -45,7 +48,7 @@ PRIORITY = {"mumbai_curated": 3, "us_scorecard": 2, "hipolabs": 1}
 _MERGE_FIELDS = (
     "city", "region", "type", "university", "naac_grade", "nirf_rank",
     "website", "logo", "annual_fee", "average_package", "highest_package",
-    "placement_percentage", "student_rating",
+    "placement_percentage", "student_rating", "courses",
 )
 _PROVENANCE_FIELDS = ("cohort", "currency", "data_source", "source_url",
                       "is_ranked")
@@ -55,6 +58,7 @@ def _providers() -> List:
     """Providers ordered highest-priority first (so merges resolve correctly)."""
     provs = [
         MumbaiProvider(_DATA_FILE),
+        USScorecardProvider(_SNAPSHOTS, api_key=_SCORECARD_KEY),
         HipolabsIndiaProvider(_SNAPSHOTS),
     ]
     return sorted(provs, key=lambda p: PRIORITY.get(p.data_source, 0),

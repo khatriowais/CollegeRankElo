@@ -1,25 +1,53 @@
 {% extends "_base.html" %}
 {% set active = 'about' %}
-{% block title %}About · CollegeRankELO{% endblock %}
+{% block title %}Methodology · CollegeRankELO{% endblock %}
 {% block body %}
-<h1>About the Project</h1>
-<div class="card">
-  <h2>Why Elo?</h2>
-  <p>Traditional rankings are static — a college can sit at #12 for years even as its placements collapse. Elo is dynamic: every pairwise comparison updates ratings in real time.</p>
-  <h3>Formulas</h3>
-  <pre><code>Expected(A) = 1 / (1 + 10^((R_B - R_A) / 400))
-R_A_new    = R_A + K * (S_A - Expected(A))
-K = {{ k }},  Starting rating = {{ start }},  Draw threshold = {{ draw_threshold }}</code></pre>
+<div class="page-head">
+  <div>
+    <span class="badge">📖 Methodology</span>
+    <h1>How the ranking works</h1>
+    <p>Two ideas combined: a <strong>weighted score</strong> decides who wins a head-to-head from real data, then <strong>Elo</strong> integrates those wins into a living leaderboard.</p>
+  </div>
+</div>
 
-  <h3>Winner is decided by a weighted score, not Elo</h3>
-  <ul>
-    <li>ROI — {{ (weights.roi*100)|int }}%</li>
-    <li>Placement % — {{ (weights.placement*100)|int }}%</li>
-    <li>Avg Package — {{ (weights.package*100)|int }}%</li>
-    <li>Fees (inverted) — {{ (weights.fees*100)|int }}%</li>
-    <li>NAAC — {{ (weights.naac*100)|int }}%</li>
-  </ul>
-  <h3>NAAC mapping</h3>
-  <p>{% for g, v in naac.items() %}<span class="badge">{{ g }} = {{ v }}</span> {% endfor %}</p>
+<div class="two-col">
+  <div class="card">
+    <h2>♟️ The Elo update</h2>
+    <p class="muted small">Same maths as chess rankings (FIDE K = {{ k }}). Beating a stronger college earns more points than beating a weaker one.</p>
+    <pre class="formula"><code>Expected(A) = 1 / (1 + 10^((R_B − R_A) / 400))
+R_A_new     = R_A + K × (S_A − Expected(A))
+
+K = {{ k }} · Start = {{ start }} · Draw line = {{ draw_threshold }}</code></pre>
+    <div class="step"><span class="step-n">1</span><div><strong>Expected score</strong><br /><span class="muted small">A 400-point gap ≈ 91% win probability. Underdogs gain more for an upset.</span></div></div>
+    <div class="step"><span class="step-n">2</span><div><strong>Actual score S</strong><br /><span class="muted small">1 = win, 0.5 = draw, 0 = loss. Zero-sum: what A gains, B loses.</span></div></div>
+    <div class="step"><span class="step-n">3</span><div><strong>Persist &amp; chart</strong><br /><span class="muted small">Both new ratings + full score breakdown are stored for audit and replay.</span></div></div>
+  </div>
+
+  <div class="card">
+    <h2>⚖️ Who wins? (not Elo!)</h2>
+    <p class="muted small">Using Elo to decide winners would be circular — the top college would always win. Winners come from external metrics instead:</p>
+    <div class="weight-row"><span>💰 ROI</span><div class="meter"><i style="width:{{ (weights.roi*100)|int }}%"></i></div><strong>{{ (weights.roi*100)|int }}%</strong></div>
+    <div class="weight-row"><span>🎯 Placement %</span><div class="meter"><i style="width:{{ (weights.placement*100)|int }}%"></i></div><strong>{{ (weights.placement*100)|int }}%</strong></div>
+    <div class="weight-row"><span>📦 Avg package</span><div class="meter"><i style="width:{{ (weights.package*100)|int }}%"></i></div><strong>{{ (weights.package*100)|int }}%</strong></div>
+    <div class="weight-row"><span>🧾 Fees (inverted)</span><div class="meter"><i style="width:{{ (weights.fees*100)|int }}%"></i></div><strong>{{ (weights.fees*100)|int }}%</strong></div>
+    <div class="weight-row"><span>🎓 NAAC grade</span><div class="meter"><i style="width:{{ (weights.naac*100)|int }}%"></i></div><strong>{{ (weights.naac*100)|int }}%</strong></div>
+    <p class="muted small">Each metric is normalised against the best of the pair. Gap &lt; {{ draw_threshold }} → <span class="pill pill-draw">Draw</span>.</p>
+    <h3>NAAC → points</h3>
+    <div class="naac-cloud">{% for g, v in naac.items() %}<span class="badge">{{ g }} = {{ v }}</span>{% endfor %}</div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:14px">
+  <h2>Viva cheat-sheet</h2>
+  <div class="two-col">
+    <div>
+      <p><strong>Why Elo over averages?</strong><br /><span class="muted">Averages are static. Elo is pairwise and dynamic — a college climbs by consistently beating peers just above it.</span></p>
+      <p><strong>Why K = {{ k }}?</strong><br /><span class="muted">FIDE standard for developing players: reactive enough to reflect new placement data, stable enough not to swing wildly.</span></p>
+    </div>
+    <div>
+      <p><strong>What stops the rich getting richer?</strong><br /><span class="muted">Winners are decided from real attributes, Elo only integrates results. Recalculate replays history deterministically after tuning.</span></p>
+      <p><strong>Production-ready?</strong><br /><span class="muted">Secrets live in <code>.env</code>, SQLAlchemy runs on SQLite or Postgres via <code>DATABASE_URL</code>, and every rating change is auditable.</span></p>
+    </div>
+  </div>
 </div>
 {% endblock %}

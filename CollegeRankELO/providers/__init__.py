@@ -12,10 +12,12 @@ else needs to change.
 from .base import RawCollege, BaseProvider
 from .mumbai import MumbaiProvider
 from .hipolabs import HipolabsIndiaProvider
+from .scorecard import USScorecardProvider
 
 __all__ = [
     "RawCollege",
     "BaseProvider",
     "MumbaiProvider",
     "HipolabsIndiaProvider",
+    "USScorecardProvider",
 ]

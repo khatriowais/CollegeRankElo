@@ -1,122 +1,134 @@
 """
 config.py
 ---------
-Centralised, environment-based configuration for CollegeRankELO.
+Central, environment-driven settings for CollegeRankELO.
 
-All secrets and tunables are read from environment variables (optionally
-loaded from a local `.env` file via python-dotenv). Nothing sensitive is
-hard-coded, which is required for a clean final-year-project submission
-and for safe deployment.
+All tunables live here and are read from environment variables (optionally
+loaded from a local ``.env`` file — see ``.env.example``). Nothing secret is
+hard-coded; the defaults below are safe development placeholders.
 
-Copy `.env.example` -> `.env` and fill in your own values::
-
-    cp .env.example .env
-
-Environment variables
----------------------
-SECRET_KEY            Flask session secret (required in production)
-ADMIN_USERNAME        Admin login username (default: admin)
-ADMIN_PASSWORD        Admin login password (default: changeme — change it!)
-DATABASE_URL          SQLAlchemy URL (default: sqlite:///database/colleges.db)
-FLASK_ENV             development | production (default: development)
-PORT                  Port to run on (default: 5000)
-ELO_K_FACTOR          Elo sensitivity K (default: 32)
-ELO_START_RATING      Starting Elo (default: 1500)
-DRAW_THRESHOLD        Weighted-score gap below which a match is a draw (default: 2.0)
-WEIGHT_ROI / WEIGHT_PLACEMENT / WEIGHT_PACKAGE / WEIGHT_FEES / WEIGHT_NAAC
-                      Comparison weights, must sum to 1.0
-DATA_FILE             Path to seed JSON (default: data/mumbai_university_colleges.json)
+Other modules (``app.py``, ``elo.py``, ``compare.py``, ``database.py``,
+``seed_database.py``) import ``settings`` from here. The attribute names below
+are load-bearing — they match what those modules expect.
 """
 
+from __future__ import annotations
+
 import os
-from dataclasses import dataclass, field
+import warnings
 
-try:
-    from dotenv import load_dotenv  # type: ignore
-    load_dotenv()
-except ImportError:
-    # python-dotenv is optional — env vars still work without it.
-    pass
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def _get(key: str, default: str = "") -> str:
-    return os.environ.get(key, default)
+# --- .env loading -----------------------------------------------------------
+# Prefer python-dotenv when installed; otherwise fall back to a tiny built-in
+# parser so the app still runs without the extra dependency.
+def _load_env_file(path: str) -> None:
+    try:
+        from dotenv import load_dotenv  # type: ignore
+        load_dotenv(path)
+        return
+    except Exception:
+        pass
+    # Minimal fallback parser: KEY=VALUE lines, '#' comments, optional quotes.
+    if not os.path.exists(path):
+        return
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            for line in fh:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, _, val = line.partition("=")
+                key, val = key.strip(), val.strip().strip('"').strip("'")
+                # Do not clobber variables already set in the real environment.
+                os.environ.setdefault(key, val)
+    except OSError:
+        pass
+
+
+_load_env_file(os.path.join(BASE_DIR, ".env"))
+
+
+# --- typed getters -----------------------------------------------------------
+def _get(key: str, default: str) -> str:
+    val = os.environ.get(key)
+    return default if val is None or val == "" else val
 
 
 def _get_int(key: str, default: int) -> int:
     try:
-        return int(os.environ.get(key, str(default)))
-    except (ValueError, TypeError):
+        return int(_get(key, str(default)))
+    except (TypeError, ValueError):
         return default
 
 
 def _get_float(key: str, default: float) -> float:
     try:
-        return float(os.environ.get(key, str(default)))
-    except (ValueError, TypeError):
+        return float(_get(key, str(default)))
+    except (TypeError, ValueError):
         return default
 
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-
-@dataclass(frozen=True)
 class Settings:
-    # --- Flask / auth ---
-    secret_key: str = field(
-        default_factory=lambda: _get("SECRET_KEY", "dev-only-change-me"))
-    admin_username: str = field(
-        default_factory=lambda: _get("ADMIN_USERNAME", "admin"))
-    admin_password: str = field(
-        default_factory=lambda: _get("ADMIN_PASSWORD", "changeme"))
-    flask_env: str = field(
-        default_factory=lambda: _get("FLASK_ENV", "development"))
-    port: int = field(
-        default_factory=lambda: _get_int("PORT", 5000))
+    """Application settings resolved from the environment (immutable at import)."""
 
-    # --- Database / data ---
-    database_url: str = field(default_factory=lambda: _get(
-        "DATABASE_URL",
-        "sqlite:///" + os.path.join(BASE_DIR, "database", "colleges.db"),
-    ))
-    data_file: str = field(default_factory=lambda: _get(
-        "DATA_FILE",
-        os.path.join(BASE_DIR, "data", "mumbai_university_colleges.json"),
-    ))
+    def __init__(self) -> None:
+        # Flask / server
+        self.secret_key: str = _get("SECRET_KEY", "dev-secret-change-me")
+        self.flask_env: str = _get("FLASK_ENV", "development")
+        self.is_production: bool = self.flask_env.lower() == "production"
+        self.port: int = _get_int("PORT", 5000)
 
-    # --- Elo tunables ---
-    elo_k_factor: int = field(
-        default_factory=lambda: _get_int("ELO_K_FACTOR", 32))
-    elo_start_rating: float = field(
-        default_factory=lambda: _get_float("ELO_START_RATING", 1500))
-    draw_threshold: float = field(
-        default_factory=lambda: _get_float("DRAW_THRESHOLD", 2.0))
+        # Admin credentials (admin panel login)
+        self.admin_username: str = _get("ADMIN_USERNAME", "admin")
+        self.admin_password: str = _get("ADMIN_PASSWORD", "changeme")
 
-    # --- Comparison weights (must sum to 1.0) ---
-    weight_roi: float = field(
-        default_factory=lambda: _get_float("WEIGHT_ROI", 0.40))
-    weight_placement: float = field(
-        default_factory=lambda: _get_float("WEIGHT_PLACEMENT", 0.25))
-    weight_package: float = field(
-        default_factory=lambda: _get_float("WEIGHT_PACKAGE", 0.20))
-    weight_fees: float = field(
-        default_factory=lambda: _get_float("WEIGHT_FEES", 0.10))
-    weight_naac: float = field(
-        default_factory=lambda: _get_float("WEIGHT_NAAC", 0.05))
+        # Database (empty -> database.py falls back to bundled SQLite file)
+        self.database_url: str = _get("DATABASE_URL", "")
 
-    @property
-    def is_production(self) -> bool:
-        return self.flask_env.lower() == "production"
+        # Elo tunables
+        self.elo_k_factor: int = _get_int("ELO_K_FACTOR", 32)
+        self.elo_start_rating: float = _get_float("ELO_START_RATING", 1500.0)
+        self.draw_threshold: float = _get_float("DRAW_THRESHOLD", 2.0)
+
+        # Data files / directories
+        self.data_dir: str = os.path.join(BASE_DIR, "data")
+        self.snapshots_dir: str = os.path.join(self.data_dir, "snapshots")
+        self.data_file: str = _get(
+            "DATA_FILE",
+            os.path.join(self.data_dir, "mumbai_university_colleges.json"),
+        )
+
+        # Multi-cohort ingestion (used from Phase 1 onward; harmless before then)
+        self.scorecard_api_key: str = _get("SCORECARD_API_KEY", "DEMO_KEY")
+        self.default_cohort: str = _get("DEFAULT_COHORT", "mumbai")
+
+        self._validate()
 
     @property
     def weights(self) -> dict:
+        """Comparison weights (should sum to ~1.0)."""
         return {
-            "roi": self.weight_roi,
-            "placement": self.weight_placement,
-            "package": self.weight_package,
-            "fees": self.weight_fees,
-            "naac": self.weight_naac,
+            "roi": _get_float("WEIGHT_ROI", 0.40),
+            "placement": _get_float("WEIGHT_PLACEMENT", 0.25),
+            "package": _get_float("WEIGHT_PACKAGE", 0.20),
+            "fees": _get_float("WEIGHT_FEES", 0.10),
+            "naac": _get_float("WEIGHT_NAAC", 0.05),
         }
+
+    def _validate(self) -> None:
+        total = sum(self.weights.values())
+        if abs(total - 1.0) > 0.001:
+            warnings.warn(
+                f"Comparison weights sum to {total:.3f}, expected 1.0. "
+                "Check WEIGHT_* values in your environment/.env."
+            )
+        if self.is_production and self.secret_key.startswith("dev-"):
+            warnings.warn(
+                "SECRET_KEY is still the dev default while FLASK_ENV=production. "
+                "Set a strong SECRET_KEY in .env."
+            )
 
 
 settings = Settings()

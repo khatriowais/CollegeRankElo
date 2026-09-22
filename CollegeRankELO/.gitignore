@@ -1,0 +1,22 @@
+# Environment / secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Scratch & temporary harvest files
+scratch/
+*.log
+_harvest*
+_nirf*
+_pdftext.py
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

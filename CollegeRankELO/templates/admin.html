@@ -4,55 +4,75 @@
 {% block body %}
 {% if not logged_in %}
   <div class="card auth-card">
-    <h1>Admin Login</h1>
+    <span class="badge">🔒 Restricted</span>
+    <h1>Admin login</h1>
+    <p class="muted small" style="margin-top:4px">Sign in with the credentials from your <code>.env</code> file (<code>ADMIN_USERNAME</code> / <code>ADMIN_PASSWORD</code>).</p>
     <form method="post" action="{{ url_for('admin_login') }}">
-      <label>Username<input name="username" required></label>
-      <label>Password<input type="password" name="password" required></label>
-      <button class="btn btn-primary" type="submit">Log in</button>
+      <label for="username">Username</label>
+      <input id="username" name="username" required autocomplete="username" placeholder="admin" />
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="••••••••" />
+      <button class="btn btn-primary" type="submit">Log in →</button>
     </form>
-    <p class="muted">Default: <code>admin</code> / <code>admin123</code></p>
+    <div class="hint-box">First run? Copy <code>.env.example</code> to <code>.env</code> and set your own password. Never commit <code>.env</code> to git.</div>
   </div>
 {% else %}
-  <div class="admin-actions card">
-    <h1>Admin Panel</h1>
-    <div class="row">
-      <form method="post" action="{{ url_for('admin_reset_elo') }}"><button class="btn">Reset all Elo</button></form>
-      <form method="post" action="{{ url_for('admin_recalculate') }}"><button class="btn">Recalculate from history</button></form>
-      <a class="btn" href="{{ url_for('admin_export', fmt='csv') }}">Export CSV</a>
-      <a class="btn" href="{{ url_for('admin_export', fmt='json') }}">Export JSON</a>
-      <a class="btn" href="{{ url_for('admin_logout') }}">Logout</a>
-    </div>
-    <form method="post" action="{{ url_for('admin_import_csv') }}" enctype="multipart/form-data" class="row">
-      <input type="file" name="file" accept=".csv" required>
-      <button class="btn btn-primary">Import CSV</button>
-    </form>
+  <div class="page-head">
+    <div><span class="badge">🛠 Admin</span><h1>Dashboard</h1><p>{{ colleges|length }} colleges in the database. Changes here update the live leaderboard instantly.</p></div>
+    <a class="btn" href="{{ url_for('admin_logout') }}">Log out</a>
   </div>
 
   <div class="card">
-    <h2>Colleges ({{ colleges|length }})</h2>
-    <table class="leaderboard">
+    <h2 style="margin-top:0">Rating controls</h2>
+    <div class="action-grid">
+      <div class="action"><h4>↺ Reset all Elo</h4><p>Set every college back to the starting rating.</p>
+        <form method="post" action="{{ url_for('admin_reset_elo') }}"><button class="btn btn-sm" type="submit">Reset ratings</button></form></div>
+      <div class="action"><h4>🧮 Recalculate</h4><p>Replay all {{ colleges|length }} colleges' match history from scratch.</p>
+        <form method="post" action="{{ url_for('admin_recalculate') }}"><button class="btn btn-sm" type="submit">Recalculate</button></form></div>
+      <div class="action"><h4>⬇ Export</h4><p>Download the dataset for your report appendix.</p>
+        <div class="row" style="margin:0"><a class="btn btn-sm" href="{{ url_for('admin_export', fmt='csv') }}">CSV</a><a class="btn btn-sm" href="{{ url_for('admin_export', fmt='json') }}">JSON</a></div></div>
+      <div class="action"><h4>⬆ Import CSV</h4><p>Columns: college_name, city, type, naac_grade, fees, packages…</p>
+        <form method="post" action="{{ url_for('admin_import_csv') }}" enctype="multipart/form-data" class="row" style="margin:0">
+          <input type="file" name="file" accept=".csv" required style="flex:1;min-width:140px" />
+          <button class="btn btn-sm btn-primary" type="submit">Import</button>
+        </form></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <div class="section-title"><h2>Colleges ({{ colleges|length }})</h2>
+      <input id="adminSearch" type="search" placeholder="Filter…" aria-label="Filter colleges" style="padding:9px 13px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)" />
+    </div>
+    <div class="table-wrap">
+    <table class="leaderboard" id="adminTable">
       <thead><tr><th>#</th><th>Name</th><th>City</th><th>Type</th><th>Fee</th><th>Elo</th><th></th></tr></thead>
       <tbody>
       {% for c in colleges %}
-        <tr>
-          <td>{{ c.id }}</td>
-          <td><a href="{{ url_for('college_detail', cid=c.id) }}">{{ c.college_name }}</a></td>
+        <tr data-name="{{ c.college_name|lower }}">
+          <td class="muted">{{ c.id }}</td>
+          <td class="college-cell"><a href="{{ url_for('college_detail', cid=c.id) }}">{{ c.college_name }}</a></td>
           <td>{{ c.city }}</td><td>{{ c.type }}</td>
           <td>₹{{ '{:,}'.format(c.annual_fee) }}</td>
-          <td>{{ c.elo_rating }}</td>
-          <td><button class="btn btn-sm delete-btn" data-id="{{ c.id }}">Delete</button></td>
+          <td><strong>{{ c.elo_rating }}</strong></td>
+          <td><button class="btn btn-sm btn-danger delete-btn" data-id="{{ c.id }}" type="button">Delete</button></td>
         </tr>
       {% endfor %}
       </tbody>
     </table>
+    </div>
   </div>
 
   <script>
+    document.getElementById('adminSearch').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('#adminTable tbody tr').forEach(tr =>
+        tr.style.display = tr.dataset.name.includes(q) ? '' : 'none');
+    });
     document.querySelectorAll('.delete-btn').forEach(b => {
       b.addEventListener('click', async () => {
-        if (!confirm('Delete this college?')) return;
+        if (!confirm('Delete this college? This cannot be undone.')) return;
         const r = await fetch('/api/deleteCollege/' + b.dataset.id, {method:'DELETE'});
-        if (r.ok) location.reload();
+        if (r.ok) location.reload(); else alert('Delete failed.');
       });
     });
   </script>

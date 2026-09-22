@@ -1,60 +1,251 @@
 {% extends "_base.html" %}
 {% set active = 'directory' %}
-{% block title %}Directory · CollegeRankELO{% endblock %}
+{% block title %}Institutions Directory · CollegeRankELO{% endblock %}
 {% block body %}
 <div class="page-head">
   <div>
-    <span class="badge">📖 Open directory</span>
-    <h1>Indian colleges &amp; universities</h1>
-    <p>A searchable directory of Indian institutions from the open
-      <a href="https://github.com/Hipo/university-domains-list" target="_blank" rel="noopener">Hipolabs dataset</a>.
-      These are listed for discovery — they are <strong>not Elo-ranked</strong>, because no verified metrics
-      (fees, placements, packages) are published for them. The
-      <a href="{{ url_for('leaderboard') }}">leaderboard</a> ranks the curated Mumbai cohort.</p>
+    <span class="badge">🌐 Universal Directory</span>
+    <h1>Explore Colleges &amp; Universities</h1>
+    <p>Discover 500+ institutions across India and the United States. Search courses, degree programs, accreditation, and metrics.</p>
+  </div>
+  <div class="hero-actions" style="margin:0">
+    <a class="btn btn-ghost" href="{{ url_for('leaderboard') }}">🏆 View Leaderboard →</a>
+    <a class="btn btn-primary" href="{{ url_for('compare_page') }}">⚔️ Compare Colleges →</a>
   </div>
 </div>
 
+<!-- Stats Strip -->
+<section class="cards stat-cards" style="margin-bottom:16px">
+  <div class="card stat-tile">
+    <div class="stat-label">Total Institutions</div>
+    <div class="stat-value">{{ stats.total_colleges }}</div>
+    <div class="stat-sub">Across all datasets</div>
+  </div>
+  <div class="card stat-tile">
+    <div class="stat-label">Elo Ranked</div>
+    <div class="stat-value" style="color:var(--brand,#4338ca)">{{ stats.total_ranked }}</div>
+    <div class="stat-sub">With verified metrics &amp; courses</div>
+  </div>
+  <div class="card stat-tile">
+    <div class="stat-label">Open Directory</div>
+    <div class="stat-value">{{ stats.total_directory }}</div>
+    <div class="stat-sub">Discovery cohort</div>
+  </div>
+  <div class="card stat-tile">
+    <div class="stat-label">States &amp; Regions</div>
+    <div class="stat-value">{{ stats.total_regions }}</div>
+    <div class="stat-sub">Geographic coverage</div>
+  </div>
+</section>
+
+<!-- Filter Form -->
 <form class="card filters" method="get" role="search" action="{{ url_for('directory') }}">
-  <input name="q" type="search" value="{{ q }}" placeholder="🔍 Search institution name…" aria-label="Search directory" />
-  <select name="region" aria-label="Filter by state">
-    <option value="">All states</option>
-    {% for r in regions %}<option value="{{ r }}" {{ 'selected' if r == region }}>{{ r }}</option>{% endfor %}
+  <input class="dir-search-input" name="q" type="search" value="{{ q }}" placeholder="🔍 Search by college name, city, or course (e.g. Computer Science, MBA)..." aria-label="Search directory" />
+  
+  <select name="status" aria-label="Filter by ranking status" onchange="this.form.submit()">
+    <option value="">All Statuses</option>
+    <option value="ranked" {{ 'selected' if status == 'ranked' }}>⚡ Elo Ranked Only</option>
+    <option value="directory" {{ 'selected' if status == 'directory' }}>📖 Directory Only</option>
   </select>
-  <button class="btn btn-primary" type="submit">Search</button>
-  {% if q or region %}<a class="btn btn-ghost" href="{{ url_for('directory') }}">Clear</a>{% endif %}
+
+  <select name="country" aria-label="Filter by country" onchange="this.form.submit()">
+    <option value="">All Countries</option>
+    {% for c in countries %}
+      <option value="{{ c }}" {{ 'selected' if c == country }}>{{ c }}</option>
+    {% endfor %}
+  </select>
+
+  <select name="region" aria-label="Filter by state" onchange="this.form.submit()">
+    <option value="">All States / Regions</option>
+    {% for r in regions %}
+      <option value="{{ r }}" {{ 'selected' if r == region }}>{{ r }}</option>
+    {% endfor %}
+  </select>
+
+  <select name="type" aria-label="Filter by type" onchange="this.form.submit()">
+    <option value="">All Types</option>
+    {% for t in types %}
+      <option value="{{ t }}" {{ 'selected' if t == type_val }}>{{ t }}</option>
+    {% endfor %}
+  </select>
+
+  <!-- View Mode -->
+  <input type="hidden" name="view" value="{{ view_mode }}" id="viewModeInput" />
+  
+  <button class="btn btn-primary" type="submit">Filter</button>
+  {% if q or region or country or status or type_val %}
+    <a class="btn btn-ghost" href="{{ url_for('directory', view=view_mode) }}">Reset</a>
+  {% endif %}
 </form>
 
-<div class="card">
-  <div class="section-title">
-    <h2>{{ total }} result{{ '' if total == 1 else 's' }}</h2>
-    <span class="muted small">Directory · not Elo-ranked</span>
+<!-- Results Header & View Toggle -->
+<div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 10px;flex-wrap:wrap;gap:10px">
+  <div>
+    <h2 style="margin:0;font-size:1.15rem">Showing {{ total }} institution{{ '' if total == 1 else 's' }}</h2>
+    <span class="muted small">
+      {% if status == 'ranked' %}Showing only Elo-ranked colleges with complete metrics{% elif status == 'directory' %}Showing open directory listings{% else %}Showing both Elo-ranked and directory colleges{% endif %}
+    </span>
   </div>
-  {% if rows %}
-  <div class="table-wrap">
-    <table class="leaderboard">
-      <thead><tr><th>#</th><th>Institution</th><th>State</th><th>Website</th></tr></thead>
-      <tbody>
+  <div style="display:flex;gap:6px">
+    <a class="view-toggle-btn {{ 'active' if view_mode == 'grid' }}" href="{{ url_for('directory', q=q, region=region, country=country, status=status, type=type_val, view='grid', page=1) }}">⊞ Grid View</a>
+    <a class="view-toggle-btn {{ 'active' if view_mode == 'table' }}" href="{{ url_for('directory', q=q, region=region, country=country, status=status, type=type_val, view='table', page=1) }}">☰ Table View</a>
+  </div>
+</div>
+
+{% if rows %}
+  {% if view_mode == 'grid' %}
+    <!-- Grid Cards View -->
+    <div class="directory-grid">
       {% for c in rows %}
-        <tr>
-          <td class="muted">{{ (page - 1) * per_page + loop.index }}</td>
-          <td class="college-cell"><a href="{{ url_for('college_detail', cid=c.id) }}">{{ c.college_name }}</a><small>{{ c.country }}</small></td>
-          <td>{{ c.region or '—' }}</td>
-          <td>{% if c.website %}<a href="{{ c.website }}" target="_blank" rel="noopener">Visit ↗</a>{% else %}—{% endif %}</td>
-        </tr>
+      {% set sym = '$' if c.currency == 'USD' else '₹' %}
+      <div class="directory-card {{ 'ranked-card' if c.is_ranked else '' }}">
+        <div>
+          <div class="dir-header">
+            <div>
+              <div class="dir-location">
+                📍 {% if c.city %}{{ c.city }}, {% endif %}{{ c.region or c.country }}
+              </div>
+              <h3 class="dir-title">
+                <a href="{{ url_for('college_detail', cid=c.id) }}">{{ c.college_name }}</a>
+              </h3>
+            </div>
+            {% if c.is_ranked %}
+              <span class="pill pill-win" title="Elo Ranked with verified data">⚡ Elo {{ c.elo_rating }}</span>
+            {% else %}
+              <span class="badge" style="font-size:0.72rem">📖 Directory</span>
+            {% endif %}
+          </div>
+
+          <div class="dir-meta">
+            <div>🏛️ <strong>{{ c.university or c.college_name }}</strong></div>
+            {% if c.type or c.naac_grade %}
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px">
+              {% if c.type %}<span class="badge" style="font-size:0.72rem">{{ c.type }}</span>{% endif %}
+              {% if c.naac_grade %}<span class="badge" style="font-size:0.72rem">NAAC {{ c.naac_grade }}</span>{% endif %}
+              {% if c.nirf_rank %}<span class="badge" style="font-size:0.72rem">NIRF #{{ c.nirf_rank }}</span>{% endif %}
+            </div>
+            {% endif %}
+          </div>
+
+          {% if c.annual_fee or c.average_package %}
+          <div class="dir-stats">
+            <div>
+              <div class="k">Annual Fee</div>
+              <div class="v">{% if c.annual_fee %}{{ sym }}{{ '{:,}'.format(c.annual_fee) }}{% else %}—{% endif %}</div>
+            </div>
+            <div>
+              <div class="k">Avg Package</div>
+              <div class="v">{% if c.average_package %}{{ sym }}{{ '{:,}'.format(c.average_package) }}{% else %}—{% endif %}</div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if c.courses and c.courses|length > 0 %}
+          <div style="margin-top:8px">
+            <span class="muted small" style="font-weight:700">📚 Available Programs ({{ c.courses|length }}):</span>
+            <div class="course-pills">
+              {% for crs in c.courses[:3] %}
+                <span class="course-pill">{{ crs.course_name }}</span>
+              {% endfor %}
+              {% if c.courses|length > 3 %}
+                <span class="course-pill" style="background:transparent;border:1px dashed var(--line);color:var(--muted)">+{{ c.courses|length - 3 }} more</span>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="dir-footer">
+          <a class="btn btn-sm btn-primary" href="{{ url_for('college_detail', cid=c.id) }}">View Profile →</a>
+          {% if c.website %}
+            <a class="btn btn-sm btn-ghost" href="{{ c.website }}" target="_blank" rel="noopener">Website ↗</a>
+          {% endif %}
+        </div>
+      </div>
       {% endfor %}
-      </tbody>
-    </table>
-  </div>
+    </div>
+
   {% else %}
-    <div class="empty">No institutions match your search. <a href="{{ url_for('directory') }}">Clear filters</a></div>
+    <!-- Table View -->
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="table-wrap" style="border:none">
+        <table class="leaderboard">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Institution</th>
+              <th>Status</th>
+              <th>State / Country</th>
+              <th>Type</th>
+              <th>Fees / yr</th>
+              <th>Avg Package</th>
+              <th>Programs</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in rows %}
+            {% set sym = '$' if c.currency == 'USD' else '₹' %}
+            <tr>
+              <td class="muted">{{ (page - 1) * per_page + loop.index }}</td>
+              <td class="college-cell">
+                <a href="{{ url_for('college_detail', cid=c.id) }}"><strong>{{ c.college_name }}</strong></a>
+                <small>{{ c.university or c.college_name }}</small>
+              </td>
+              <td>
+                {% if c.is_ranked %}
+                  <span class="pill pill-win">⚡ Elo {{ c.elo_rating }}</span>
+                {% else %}
+                  <span class="badge" style="font-size:0.75rem">Directory</span>
+                {% endif %}
+              </td>
+              <td>{{ c.region or c.country }}</td>
+              <td>{{ c.type or '—' }}</td>
+              <td><strong>{% if c.annual_fee %}{{ sym }}{{ '{:,}'.format(c.annual_fee) }}{% else %}—{% endif %}</strong></td>
+              <td><strong>{% if c.average_package %}{{ sym }}{{ '{:,}'.format(c.average_package) }}{% else %}—{% endif %}</strong></td>
+              <td>
+                {% if c.courses and c.courses|length > 0 %}
+                  <span class="badge" style="font-size:0.75rem">{{ c.courses|length }} courses</span>
+                {% else %}
+                  <span class="muted">—</span>
+                {% endif %}
+              </td>
+              <td>
+                <a class="btn btn-sm" href="{{ url_for('college_detail', cid=c.id) }}">Profile →</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
   {% endif %}
 
+  <!-- Pagination -->
   {% if pages > 1 %}
-  <div class="pagination">
-    {% if page > 1 %}<a class="btn btn-sm" href="{{ url_for('directory', q=q, region=region, page=page-1) }}">← Prev</a>{% else %}<button type="button" disabled>← Prev</button>{% endif %}
-    <span id="pageInfo">Page {{ page }} / {{ pages }}</span>
-    {% if page < pages %}<a class="btn btn-sm" href="{{ url_for('directory', q=q, region=region, page=page+1) }}">Next →</a>{% else %}<button type="button" disabled>Next →</button>{% endif %}
+  <div class="pagination" style="margin-top:16px">
+    {% if page > 1 %}
+      <a class="btn btn-sm" href="{{ url_for('directory', q=q, region=region, country=country, status=status, type=type_val, view=view_mode, page=page-1) }}">← Previous</a>
+    {% else %}
+      <button type="button" disabled>← Previous</button>
+    {% endif %}
+    
+    <span id="pageInfo">Page {{ page }} of {{ pages }} ({{ total }} colleges)</span>
+    
+    {% if page < pages %}
+      <a class="btn btn-sm" href="{{ url_for('directory', q=q, region=region, country=country, status=status, type=type_val, view=view_mode, page=page+1) }}">Next →</a>
+    {% else %}
+      <button type="button" disabled>Next →</button>
+    {% endif %}
   </div>
   {% endif %}
-</div>
+
+{% else %}
+  <div class="card empty" style="padding:40px 20px;margin-top:14px">
+    <div style="font-size:2.2rem;margin-bottom:8px">🔍</div>
+    <h3>No institutions found</h3>
+    <p class="muted" style="max-width:460px;margin:0 auto 16px">No colleges matched your search criteria. Try removing filters or searching with a different keyword.</p>
+    <a class="btn btn-primary" href="{{ url_for('directory', view=view_mode) }}">Reset All Filters</a>
+  </div>
+{% endif %}
 {% endblock %}

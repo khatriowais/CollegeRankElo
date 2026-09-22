@@ -13,32 +13,47 @@ Then open http://localhost:5000
 import csv
 import io
 import json
-import os
-from datetime import datetime
 from functools import wraps
 
 from flask import (Flask, render_template, request, jsonify, redirect,
-                   url_for, session, Response, flash, abort, send_file)
+                   url_for, session, Response, flash, abort)
 
 from database import SessionLocal, init_db
 from models import College, Comparison, EloHistory
 from elo import EloService, EloConfig
 from compare import CompareService, NAAC_MAP, WEIGHTS, DRAW_THRESHOLD
+from match import run_match, eligibility_error
+from config import settings
 
 app = Flask(__name__)
-app.secret_key = "collegerankelo-dev-secret"
+app.secret_key = settings.secret_key
 
-elo_service = EloService()
+if settings.is_production and settings.secret_key.startswith("dev-"):
+    import warnings
+    warnings.warn(
+        "SECRET_KEY is still the dev default while FLASK_ENV=production. "
+        "Set a strong SECRET_KEY in .env."
+    )
+
+elo_service = EloService(k=settings.elo_k_factor)
 compare_service = CompareService()
 
-ADMIN_USER = "admin"
-ADMIN_PASS = "admin123"
+ADMIN_USER = settings.admin_username
+ADMIN_PASS = settings.admin_password
 
 
 # ---------- helpers ----------------------------------------------------------
 
 def db():
     return SessionLocal()
+
+
+@app.teardown_appcontext
+def _remove_session(exception=None):
+    # Return the scoped session's connection to the pool after every request.
+    # Without this, each request leaks a connection and the pool is exhausted
+    # after ~15 requests (QueuePool TimeoutError).
+    SessionLocal.remove()
 
 
 def login_required(fn):
@@ -51,46 +66,10 @@ def login_required(fn):
 
 
 def college_or_404(s, cid: int) -> College:
-    c = s.query(College).get(cid)
+    c = s.get(College, cid)
     if not c:
         abort(404)
     return c
-
-
-def uniform_ratings(colleges):
-    """Calculate one deterministic round-robin Elo table for all colleges."""
-    ordered = sorted(colleges, key=lambda c: (c.college_name.lower(), c.id))
-    ratings = {college.id: float(EloConfig.START_RATING) for college in ordered}
-    college_data = {college.id: college.to_dict() for college in ordered}
-
-    for index, college_a in enumerate(ordered):
-        for college_b in ordered[index + 1:]:
-            data_a, data_b = college_data[college_a.id], college_data[college_b.id]
-            peers = compare_service.peers_max(data_a, data_b)
-            score_a = compare_service.score(data_a, peers)
-            score_b = compare_service.score(data_b, peers)
-            winner = compare_service.decide(score_a, score_b)
-            outcome_a = {"A": 1.0, "B": 0.0, "DRAW": 0.5}[winner]
-            result = elo_service.update(ratings[college_a.id],
-                                        ratings[college_b.id], outcome_a)
-            ratings[college_a.id] = result.new_a
-            ratings[college_b.id] = result.new_b
-    return ratings
-
-
-def refresh_uniform_ratings(s):
-    """Persist the shared baseline so every visitor sees identical ratings."""
-    colleges = s.query(College).all()
-    ratings = uniform_ratings(colleges)
-    changed = False
-    for college in colleges:
-        rating = ratings[college.id]
-        if college.elo_rating != rating:
-            college.elo_rating = rating
-            changed = True
-    if changed:
-        s.commit()
-    return ratings
 
 
 # ---------- page routes ------------------------------------------------------
@@ -98,40 +77,120 @@ def refresh_uniform_ratings(s):
 @app.route("/")
 def index():
     s = db()
-    colleges = s.query(College).all()
-    refresh_uniform_ratings(s)
-    ranked = sorted(colleges, key=lambda c: c.elo_rating or 0, reverse=True)
-    top10 = ranked[:10]
+    # Only ranked colleges (Mumbai cohort) carry an Elo / metrics.
+    ranked = s.query(College).filter(College.is_ranked == True).all()  # noqa: E712
+    directory_count = (s.query(College)
+                       .filter(College.is_ranked == False).count())  # noqa: E712
+    top10 = sorted(ranked, key=lambda c: c.elo_rating or 0, reverse=True)[:10]
+    pkgs = [c.average_package for c in ranked if c.average_package is not None]
+    fees = [c.annual_fee for c in ranked if c.annual_fee is not None]
+    states = (s.query(College.region)
+              .filter(College.is_ranked == False,  # noqa: E712
+                      College.region.isnot(None))
+              .distinct().count())
     stats = {
-        "count": len(colleges),
-        "top_elo": round(max((c.elo_rating for c in colleges), default=0), 2),
-        "avg_package": int(sum(c.average_package or 0 for c in colleges) /
-                           max(1, len(colleges))),
-        "avg_fee": int(sum(c.annual_fee or 0 for c in colleges) /
-                       max(1, len(colleges))),
+        "ranked": len(ranked),
+        "directory": directory_count,
+        "count": len(ranked) + directory_count,
+        "top_elo": round(max((c.elo_rating for c in ranked), default=0), 2),
+        "states": states,
+        "avg_package": int(sum(pkgs) / len(pkgs)) if pkgs else None,
+        "avg_fee": int(sum(fees) / len(fees)) if fees else None,
     }
     recent = (s.query(Comparison).order_by(Comparison.created_at.desc())
               .limit(5).all())
     return render_template("index.html", stats=stats,
                            top10=[c.to_dict() for c in top10],
-                           top5=[c.to_dict() for c in ranked[:5]],
                            recent=[_comparison_dict(s, r) for r in recent])
 
 
 @app.route("/leaderboard")
 def leaderboard():
     s = db()
-    refresh_uniform_ratings(s)
-    colleges = [c.to_dict() for c in s.query(College).all()]
-    colleges.sort(key=lambda c: c["elo_rating"], reverse=True)
+    colleges = [c.to_dict() for c in
+                s.query(College).filter(College.is_ranked == True).all()]  # noqa: E712
+    colleges.sort(key=lambda c: c["elo_rating"] or 0, reverse=True)
     return render_template("leaderboard.html", colleges=colleges)
+
+
+@app.route("/directory")
+def directory():
+    """Searchable, filterable directory across all institutions (Mumbai, India, US)."""
+    s = db()
+    q = (request.args.get("q") or "").strip()
+    region = (request.args.get("region") or "").strip()
+    country = (request.args.get("country") or "").strip()
+    status = (request.args.get("status") or "").strip()
+    type_val = (request.args.get("type") or "").strip()
+    view_mode = (request.args.get("view") or "grid").strip()
+    page = request.args.get("page", 1, type=int) or 1
+    page = max(1, page)
+    per_page = 24 if view_mode == "grid" else 30
+
+    base = s.query(College)
+    if q:
+        search_pattern = f"%{q}%"
+        base = base.filter(
+            (College.college_name.ilike(search_pattern)) |
+            (College.city.ilike(search_pattern)) |
+            (College.region.ilike(search_pattern)) |
+            (College.courses.ilike(search_pattern))
+        )
+    if country:
+        base = base.filter(College.country == country)
+    if region:
+        base = base.filter(College.region == region)
+    if type_val:
+        base = base.filter(College.type == type_val)
+    if status == "ranked":
+        base = base.filter(College.is_ranked == True)  # noqa: E712
+    elif status == "directory":
+        base = base.filter(College.is_ranked == False)  # noqa: E712
+
+    total = base.count()
+    pages = max(1, (total + per_page - 1) // per_page)
+    page = min(page, pages)
+    
+    # Order ranked first if all, then alphabetical
+    rows = (base.order_by(College.is_ranked.desc(), College.college_name.asc())
+            .limit(per_page).offset((page - 1) * per_page).all())
+
+    # Get distinct filter options
+    regions = [r[0] for r in
+               s.query(College.region)
+               .filter(College.region.isnot(None))
+               .distinct().order_by(College.region).all() if r[0]]
+    countries = [c[0] for c in
+                 s.query(College.country)
+                 .filter(College.country.isnot(None))
+                 .distinct().order_by(College.country).all() if c[0]]
+    types = [t[0] for t in
+             s.query(College.type)
+             .filter(College.type.isnot(None))
+             .distinct().order_by(College.type).all() if t[0]]
+
+    # Stats for directory header
+    stats = {
+        "total_colleges": s.query(College).count(),
+        "total_ranked": s.query(College).filter(College.is_ranked == True).count(),  # noqa: E712
+        "total_directory": s.query(College).filter(College.is_ranked == False).count(),  # noqa: E712
+        "total_regions": len(regions),
+    }
+
+    return render_template("directory.html",
+                           rows=[c.to_dict() for c in rows],
+                           total=total, page=page, pages=pages,
+                           per_page=per_page, q=q, region=region,
+                           country=country, status=status, type_val=type_val,
+                           view_mode=view_mode, regions=regions,
+                           countries=countries, types=types, stats=stats)
 
 
 @app.route("/compare")
 def compare_page():
     s = db()
-    refresh_uniform_ratings(s)
     colleges = [c.to_dict() for c in s.query(College)
+                .filter(College.is_ranked == True)  # noqa: E712
                 .order_by(College.college_name).all()]
     return render_template("compare.html", colleges=colleges,
                            weights=WEIGHTS, draw_threshold=DRAW_THRESHOLD)
@@ -140,7 +199,6 @@ def compare_page():
 @app.route("/college/<int:cid>")
 def college_detail(cid):
     s = db()
-    refresh_uniform_ratings(s)
     c = college_or_404(s, cid)
     history = (s.query(EloHistory).filter_by(college_id=cid)
                .order_by(EloHistory.created_at.asc()).all())
@@ -196,7 +254,7 @@ def admin_panel():
 @login_required
 def admin_reset_elo():
     s = db()
-    for c in s.query(College).all():
+    for c in s.query(College).filter(College.is_ranked == True).all():  # noqa: E712
         c.elo_rating = EloConfig.START_RATING
         s.add(EloHistory(college_id=c.id, rating=EloConfig.START_RATING))
     s.commit()
@@ -207,11 +265,31 @@ def admin_reset_elo():
 @app.route("/admin/recalculate", methods=["POST"])
 @login_required
 def admin_recalculate():
-    """Rebuild the shared rating table from the complete college set."""
+    """Replay all stored comparisons from scratch."""
     s = db()
-    refresh_uniform_ratings(s)
+    ranked = s.query(College).filter(College.is_ranked == True).all()  # noqa: E712
+    for c in ranked:
+        c.elo_rating = EloConfig.START_RATING
+    s.query(EloHistory).delete()
+    for c in ranked:
+        s.add(EloHistory(college_id=c.id, rating=EloConfig.START_RATING))
+    s.flush()
+
+    comps = s.query(Comparison).order_by(Comparison.created_at.asc()).all()
+    for cmp in comps:
+        a = s.get(College, cmp.college_a_id)
+        b = s.get(College, cmp.college_b_id)
+        if not a or not b:
+            continue
+        score_a = 0.5 if cmp.winner == "DRAW" else (1.0 if cmp.winner == "A" else 0.0)
+        res = elo_service.update(a.elo_rating, b.elo_rating, score_a)
+        cmp.old_elo_a, cmp.old_elo_b = a.elo_rating, b.elo_rating
+        cmp.new_elo_a, cmp.new_elo_b = res.new_a, res.new_b
+        a.elo_rating, b.elo_rating = res.new_a, res.new_b
+        s.add(EloHistory(college_id=a.id, rating=res.new_a))
+        s.add(EloHistory(college_id=b.id, rating=res.new_b))
     s.commit()
-    flash("Recalculated the uniform all-college Elo leaderboard.", "ok")
+    flash(f"Recalculated Elo from {len(comps)} comparisons.", "ok")
     return redirect(url_for("admin_panel"))
 
 
@@ -275,23 +353,24 @@ def admin_export(fmt):
 @app.route("/api/colleges")
 def api_colleges():
     s = db()
-    refresh_uniform_ratings(s)
     return jsonify([c.to_dict() for c in s.query(College).all()])
 
 
 @app.route("/api/college/<int:cid>")
 def api_college(cid):
     s = db()
-    refresh_uniform_ratings(s)
     return jsonify(college_or_404(s, cid).to_dict())
 
 
 @app.route("/api/leaderboard")
 def api_leaderboard():
     s = db()
-    refresh_uniform_ratings(s)
-    rows = sorted([c.to_dict() for c in s.query(College).all()],
-                  key=lambda c: c["elo_rating"], reverse=True)
+    cohort = request.args.get("cohort")
+    q = s.query(College).filter(College.is_ranked == True)  # noqa: E712
+    if cohort:
+        q = q.filter(College.cohort == cohort)
+    rows = sorted([c.to_dict() for c in q.all()],
+                  key=lambda c: c["elo_rating"] or 0, reverse=True)
     for i, r in enumerate(rows, 1):
         r["rank"] = i
     return jsonify(rows)
@@ -301,44 +380,29 @@ def api_leaderboard():
 def api_compare():
     payload = request.get_json(force=True)
     s = db()
-    refresh_uniform_ratings(s)
     a = college_or_404(s, int(payload["a"]))
     b = college_or_404(s, int(payload["b"]))
-    if a.id == b.id:
-        return jsonify({"error": "select two different colleges"}), 400
+    # Only ranked colleges have metrics/Elo; never mix cohorts (currencies).
+    err = eligibility_error(a, b)
+    if err:
+        return jsonify({"error": err}), 400
 
-    a_dict, b_dict = a.to_dict(), b.to_dict()
-    peers = compare_service.peers_max(a_dict, b_dict)
-    score_a = compare_service.score(a_dict, peers)
-    score_b = compare_service.score(b_dict, peers)
-    winner = compare_service.decide(score_a, score_b)
-
-    # User simulations are recorded, but never mutate the shared leaderboard.
-    # Public ratings come only from the deterministic all-college round robin.
-    ratings = uniform_ratings(s.query(College).all())
-    old_a, old_b = ratings[a.id], ratings[b.id]
-    outcome_a = {"A": 1.0, "B": 0.0, "DRAW": 0.5}[winner]
-    res = elo_service.update(old_a, old_b, outcome_a)
-    comp = Comparison(
-        college_a_id=a.id, college_b_id=b.id, winner=winner,
-        score_a=score_a.total, score_b=score_b.total,
-        breakdown_a=json.dumps(score_a.as_dict()),
-        breakdown_b=json.dumps(score_b.as_dict()),
-        old_elo_a=old_a, old_elo_b=old_b,
-        new_elo_a=res.new_a, new_elo_b=res.new_b,
-    )
-    s.add(comp)
+    result = run_match(s, a, b, compare_service, elo_service)
     s.commit()
 
     return jsonify({
         "a": a.to_dict(), "b": b.to_dict(),
-        "winner": winner,
-        "score_a": score_a.as_dict(),
-        "score_b": score_b.as_dict(),
-        "old_elo": {"a": old_a, "b": old_b},
-        "new_elo": {"a": res.new_a, "b": res.new_b},
-        "expected": {"a": res.expected_a, "b": res.expected_b},
+        "winner": result["winner"],
+        "score_a": result["score_a"].as_dict(),
+        "score_b": result["score_b"].as_dict(),
+        "old_elo": result["old_elo"],
+        "new_elo": result["new_elo"],
+        "expected": result["expected"],
         "weights": WEIGHTS,
+        # Which parameters actually decided this match. When two colleges only
+        # share a NAAC grade this is ["naac"] alone -- the UI says so rather
+        # than implying fees and placement were weighed.
+        "metrics_used": result["metrics_used"],
     })
 
 
@@ -377,10 +441,12 @@ def api_delete_college(cid):
 # ---------- helpers ----------------------------------------------------------
 
 def _comparison_dict(s, cmp: Comparison) -> dict:
+    ca = s.get(College, cmp.college_a_id)
+    cb = s.get(College, cmp.college_b_id)
     return {
         "id": cmp.id,
-        "a": s.query(College).get(cmp.college_a_id).college_name,
-        "b": s.query(College).get(cmp.college_b_id).college_name,
+        "a": ca.college_name if ca else "?",
+        "b": cb.college_name if cb else "?",
         "winner": cmp.winner,
         "score_a": cmp.score_a,
         "score_b": cmp.score_b,
@@ -396,8 +462,10 @@ def _comparison_dict(s, cmp: Comparison) -> dict:
 
 @app.errorhandler(404)
 def _404(_e):
-    return render_template("index.html", stats={"count": 0, "top_elo": 0,
-                                                "avg_package": 0, "avg_fee": 0},
+    return render_template("index.html",
+                           stats={"count": 0, "ranked": 0, "directory": 0,
+                                  "states": 0, "top_elo": 0,
+                                  "avg_package": None, "avg_fee": None},
                            top10=[], recent=[]), 404
 
 
@@ -411,4 +479,5 @@ if __name__ == "__main__":
         seed_run()
     else:
         s.close()
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=not settings.is_production, host="0.0.0.0",
+            port=settings.port)

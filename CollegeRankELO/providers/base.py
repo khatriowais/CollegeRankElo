@@ -36,6 +36,9 @@ class RawCollege:
     logo: Optional[str] = None
     source_url: Optional[str] = None
 
+    # Courses / Programs & Fee Structure
+    courses: Optional[List[dict]] = None
+
     # Metrics (None where a source has no verified figure — never fabricate)
     annual_fee: Optional[int] = None
     average_package: Optional[int] = None
@@ -45,7 +48,11 @@ class RawCollege:
 
     def column_values(self) -> dict:
         """Return a dict of column -> value for constructing a ``College``."""
-        return asdict(self)
+        import json
+        d = asdict(self)
+        if isinstance(d.get("courses"), list):
+            d["courses"] = json.dumps(d["courses"], ensure_ascii=False)
+        return d
 
 
 class BaseProvider(abc.ABC):
